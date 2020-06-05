@@ -1,7 +1,23 @@
-const express = require('express')
+var express = require('express')
  
-const app = express()
+var app = express()
+
+//Connect db and create table
+var mysql = require('mysql');
+var con = mysql.createConnection({
+   host: "localhost",
+   user: "root",
+   password: "12345678",
+   database: "computer_review"
+ });
+
+ con.connect(function(err) {
+   if (err) throw err;
+   console.log("Connected!");
+ });
  
+
+
 app.get('/', (req, res) => {
    res.send('hello from server!')
 })
