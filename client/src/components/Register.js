@@ -9,6 +9,7 @@ class Register extends Component {
       email: '',
       password: '',
       image: '',
+      imagePreviewUrl: '',
       errors: {}
     }
 
@@ -23,8 +24,7 @@ class Register extends Component {
     e.preventDefault()
 
     const user = {
-      first_name: this.state.first_name,
-      last_name: this.state.last_name,
+      name: this.state.name,
       email: this.state.email,
       password: this.state.password,
       image: this.state.image
@@ -35,7 +35,32 @@ class Register extends Component {
     })
   }
 
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        image: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    console.log(this.state.image);
+
+    reader.readAsDataURL(file)
+  }
+
   render() {
+    let {imagePreviewUrl} = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<img src={imagePreviewUrl} alt=""/>);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
     return (
       <div className="container">
         <div className="row">
@@ -47,9 +72,9 @@ class Register extends Component {
                 <input
                   type="text"
                   className="form-control"
-                  name="first_name"
+                  name="name"
                   placeholder="Enter your name"
-                  value={this.state.first_name}
+                  value={this.state.name}
                   onChange={this.onChange}
                 />
               </div>
@@ -76,15 +101,13 @@ class Register extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="name">Image</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  name="image"
-                  placeholder="Enter your image"
-                  value={this.state.image}
-                  onChange={this.onChange}
-                />
+              <input className="fileInput" 
+                name="image"
+                type="file" 
+                onChange={(e)=>this._handleImageChange(e)} />
+              </div>
+              <div className="imgPreview">
+                {$imagePreview}
               </div>
               <button
                 type="submit"

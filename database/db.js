@@ -3,7 +3,6 @@ const db = {}
 const sequelize = new Sequelize('computer_review', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
-  operatorsAliases: false,
 
   pool: {
     max: 5,

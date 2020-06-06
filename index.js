@@ -12,6 +12,8 @@ app.use(
   })
 )
 
+app.use(express.static('public'))
+
 var Users = require('./routes/Users')
 
 app.use('/users', Users)
@@ -34,7 +36,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
    host: "localhost",
    user: "root",
-   password: "12345678",
+   password: "",
    database: "computer_review"
  });
 

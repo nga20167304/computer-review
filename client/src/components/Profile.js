@@ -41,7 +41,7 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Image</td>
-                <td>{this.state.image}</td>
+                <td><img src={this.state.image} alt=""/></td>
               </tr>
             </tbody>
           </table>
