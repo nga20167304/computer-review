@@ -1,37 +1,38 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-import axios from 'axios';
+import { BrowserRouter as Router, Route } from 'react-router-dom'
+// import axios from 'axios';
+
+import Navbar from './components/Navbar'
+import Landing from './components/Landing'
+import Login from './components/Login'
+import Register from './components/Register'
+import Profile from './components/Profile'
+
 
 class App extends Component{
-  state = {
-    greeting: ''
-  }
+  // state = {
+  //   greeting: ''
+  // }
 
-  componentDidMount(){
-    axios.get('/api/helloworld')
-      .then(result => this.setState({greeting: result.data.sayHi}));
-  }
+  // componentDidMount(){
+  //   axios.get('/api/helloworld')
+  //     .then(result => this.setState({greeting: result.data.sayHi}));
+  // }
 
-  render(){
+  render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            {this.state.greeting}
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <Router>
+        <div className="App">
+          <Navbar />
+          <Route exact path="/" component={Landing} />
+          <div className="container">
+            <Route exact path="/register" component={Register} />
+            <Route exact path="/login" component={Login} />
+            <Route exact path="/profile" component={Profile} />
+          </div>
+        </div>
+      </Router>
+    )
   }
 }
 
