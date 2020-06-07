@@ -10,7 +10,7 @@ class Register extends Component {
       password: '',
       image: '',
       imagePreviewUrl: '',
-      errors: {}
+      errors: []
     }
 
     this.onChange = this.onChange.bind(this)
@@ -29,9 +29,26 @@ class Register extends Component {
       password: this.state.password,
       image: this.state.image
     }
+    let validateErrs = [];
+    for(let attr in user){
+      if(attr !== 'image' && !user[attr]){
+        validateErrs.push(attr + ' is require!');
+      }
+    }
+    if(validateErrs.length){
+      console.log('register error: ' + validateErrs);
+      this.setState({errors: validateErrs});
+      return;
+    }
 
-    register(user).then(res => {
-      this.props.history.push(`/login`)
+    register(user).then(({errs}) => {
+      if(errs && errs.length){
+        console.log('register error: ' + errs);
+        this.setState({errors: errs});
+        return;
+      }else{
+        this.props.history.push(`/login`)
+      }
     })
   }
 
@@ -61,10 +78,12 @@ class Register extends Component {
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
+    let alerts = this.state.errors.map(err => <div className="alert alert-danger" role="alert"> {err} </div>);
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
+            {alerts}
             <form noValidate onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <div className="form-group">

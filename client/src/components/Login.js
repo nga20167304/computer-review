@@ -7,7 +7,7 @@ class Login extends Component {
     this.state = {
       email: '',
       password: '',
-      errors: {}
+      errors: []
     }
 
     this.onChange = this.onChange.bind(this)
@@ -25,18 +25,36 @@ class Login extends Component {
       password: this.state.password
     }
 
-    login(user).then(res => {
-      if (res) {
+    let validateErrs = [];
+    for(let attr in user){
+      if(!user[attr]){
+        validateErrs.push(attr + ' is require!');
+      }
+    }
+    if(validateErrs.length){
+      console.log('login error: ' + validateErrs);
+      this.setState({errors: validateErrs});
+      return;
+    }
+
+    login(user).then(({errs}) => {
+      if(errs && errs.length) {
+        console.log('login error: ' + errs);
+        this.setState({errors: errs});
+        return;
+      }else{
         this.props.history.push(`/profile`)
       }
     })
   }
 
   render() {
+    let alerts = this.state.errors.map(err => <div className="alert alert-danger" role="alert"> {err} </div>);
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
+            {alerts}
             <form noValidate onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Please sign in</h1>
               <div className="form-group">

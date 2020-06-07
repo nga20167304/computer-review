@@ -6,6 +6,10 @@ const jwt = require('jsonwebtoken')
 var multer  = require('multer')
 var upload = multer({ dest: './public/uploads/' })
 var md5 = require('md5')
+const util = require('util');
+require('util.promisify').shim();
+var fs = require('fs')
+const unlinkAsync = util.promisify(fs.unlink);
 
 const User = require('../models/User')
 users.use(cors())
@@ -13,35 +17,40 @@ users.use(cors())
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register',upload.single('image'), (req, res) => {
-  console.log(req.file);
-  console.log(req.body.image);
-  req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
-  const userData = {
-    name: req.body.name,
-    email: req.body.email,
-    password: req.body.password,
-    image: req.body.image
+  console.log('req file ',req.file);
+  if(req.file){
+    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+  }else{
+    req.body.image = '/uploads/default';
   }
-
+  console.log('req body img ',req.body.image);
   User.findOne({
     where: {
       email: req.body.email
     }
   }).then(user => {
       if (!user) {
-        userData.password = md5(userData.password);
+        const userData = {
+          name: req.body.name,
+          email: req.body.email,
+          password: md5(req.body.password),
+          image: req.body.image
+        }
         User.create(userData)
           .then(user => {
-            res.json({ status: user.email + 'Registered!' })
+            res.json({errs: []});
           })
           .catch(err => {
-            res.send('error: ' + err)
+            res.send('error: ' + err);
           })
       } else {
-        res.json({ error: 'User already exists' })
+        if(req.file) unlinkAsync(req.file.path);
+        let errs = [];
+        errs.push(user.email + ' existed!');
+        res.json({errs});
       }
     }).catch(err => {
-        res.send('error: ' + err)
+      res.send('error: ' + err);
       })
 })
 
@@ -57,13 +66,13 @@ users.post('/login', (req, res) => {
           let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
             expiresIn: 1440
           })
-          res.send(token)
+          res.send(token);
           // res.send(user);
         }else {
-          res.status(400).json(user);
+          res.json({errs: ['Wrong email or password']});
         }
       } else {
-        res.status(400).json({ error: 'User does not exist' })
+        res.json({errs: ['Wrong email or password']});
       }
     }).catch(err => {
         res.status(400).json({ error: err })
