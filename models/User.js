@@ -21,8 +21,9 @@ module.exports = db.sequelize.define(
     image: {
       type: Sequelize.STRING
     }
-  },
-  {
-    timestamps: false
   }
+  // ,
+  // {
+  //   timestamps: false
+  // }
 )

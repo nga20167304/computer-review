@@ -13,6 +13,7 @@ users.use(cors())
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register',upload.single('image'), (req, res) => {
+  console.log("attempting register");
   console.log(req.file);
   console.log(req.body.image);
   req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
@@ -23,6 +24,8 @@ users.post('/register',upload.single('image'), (req, res) => {
     image: req.body.image
   }
 
+  console.log("userData:" + JSON.stringify(userData));
+
   User.findOne({
     where: {
       email: req.body.email
@@ -32,7 +35,8 @@ users.post('/register',upload.single('image'), (req, res) => {
         userData.password = md5(userData.password);
         User.create(userData)
           .then(user => {
-            res.json({ status: user.email + 'Registered!' })
+            console.log(JSON.stringify(userData));
+            res.json({ status: user + 'Registered!' })
           })
           .catch(err => {
             res.send('error: ' + err)
@@ -60,7 +64,7 @@ users.post('/login', (req, res) => {
           res.send(token)
           // res.send(user);
         }else {
-          res.status(400).json(user);
+          res.status(400).json({ error: "Wrong password"});
         }
       } else {
         res.status(400).json({ error: 'User does not exist' })
