@@ -8,9 +8,10 @@ class Register extends Component {
       name: '',
       email: '',
       password: '',
+      confirmPassword: '',
       image: '',
       imagePreviewUrl: '',
-      errors: {}
+      errors: []
     }
 
     this.onChange = this.onChange.bind(this)
@@ -25,13 +26,40 @@ class Register extends Component {
 
     const user = {
       name: this.state.name,
-      email: this.state.email,
+      email: this.state.email.toLowerCase(),
       password: this.state.password,
       image: this.state.image
     }
+    let validateErrs = [];
+  // eslint-disable-next-line
+    let reg = /^\w+(\.\w+)*@\w+\.\w+(\.\w+){0,2}$/i;
 
-    register(user).then(res => {
-      this.props.history.push(`/login`)
+    if(!reg.test(user.email)){
+      validateErrs.push('Email invalid!');
+    }
+    
+    if(this.state.password !== this.state.confirmPassword){
+      validateErrs.push('Confirm password wrong!');
+    }
+    for(let attr in user){
+      if(attr !== 'image' && !user[attr]){
+        validateErrs.push(attr + ' is require!');
+      }
+    }
+    if(validateErrs.length){
+      console.log('register error: ' + validateErrs);
+      this.setState({errors: validateErrs});
+      return;
+    }
+
+    register(user).then(({errs}) => {
+      if(errs && errs.length){
+        console.log('register error: ' + errs);
+        this.setState({errors: errs});
+        return;
+      }else{
+        this.props.history.push(`/login`)
+      }
     })
   }
 
@@ -57,14 +85,16 @@ class Register extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} alt=""/>);
+      $imagePreview = (<div><img width="200" height="200" src={imagePreviewUrl} alt=""/></div>);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
+    let alerts = this.state.errors.map((err, index) => <div key={index} className="alert alert-danger" role="alert"> {err} </div>);
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
+            {alerts}
             <form noValidate onSubmit={this.onSubmit}>
               <h1 className="h3 mb-3 font-weight-normal">Register</h1>
               <div className="form-group">
@@ -97,6 +127,17 @@ class Register extends Component {
                   name="password"
                   placeholder="Password"
                   value={this.state.password}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  placeholder="Password"
+                  value={this.state.confirmPassword}
                   onChange={this.onChange}
                 />
               </div>
