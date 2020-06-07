@@ -14,6 +14,10 @@ class Profile extends Component {
 
   componentDidMount() {
     const token = localStorage.usertoken
+    if(!token){
+      this.props.history.push(`/login`);
+      return;
+    }
     const decoded = jwt_decode(token)
     this.setState({
       name: decoded.name,
@@ -41,7 +45,7 @@ class Profile extends Component {
               </tr>
               <tr>
                 <td>Image</td>
-                <td>{this.state.image}</td>
+                <td><img width="200" height="200" src={this.state.image} alt="Default img"/></td>
               </tr>
             </tbody>
           </table>
