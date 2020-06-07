@@ -45,9 +45,7 @@ users.post('/register',upload.single('image'), (req, res) => {
           })
       } else {
         if(req.file) unlinkAsync(req.file.path);
-        let errs = [];
-        errs.push(user.email + ' existed!');
-        res.json({errs});
+        res.json({errs: [user.email + ' existed!']});
       }
     }).catch(err => {
       res.send('error: ' + err);

@@ -18,7 +18,7 @@ export const register = newUser => {
         }else {
           console.log('Registed');
         }
-        return response;
+        return response.data;
       }).catch(err => {
         console.log(err)
       })

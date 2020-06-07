@@ -8,6 +8,7 @@ class Register extends Component {
       name: '',
       email: '',
       password: '',
+      confirmPassword: '',
       image: '',
       imagePreviewUrl: '',
       errors: []
@@ -25,11 +26,21 @@ class Register extends Component {
 
     const user = {
       name: this.state.name,
-      email: this.state.email,
+      email: this.state.email.toLowerCase(),
       password: this.state.password,
       image: this.state.image
     }
     let validateErrs = [];
+  // eslint-disable-next-line
+    let reg = /^\w+(\.\w+)*@\w+\.\w+(\.\w+){0,2}$/i;
+
+    if(!reg.test(user.email)){
+      validateErrs.push('Email invalid!');
+    }
+    
+    if(this.state.password !== this.state.confirmPassword){
+      validateErrs.push('Confirm password wrong!');
+    }
     for(let attr in user){
       if(attr !== 'image' && !user[attr]){
         validateErrs.push(attr + ' is require!');
@@ -74,11 +85,11 @@ class Register extends Component {
     let {imagePreviewUrl} = this.state;
     let $imagePreview = null;
     if (imagePreviewUrl) {
-      $imagePreview = (<img src={imagePreviewUrl} alt=""/>);
+      $imagePreview = (<div><img width="200" height="200" src={imagePreviewUrl} alt=""/></div>);
     } else {
       $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
     }
-    let alerts = this.state.errors.map(err => <div className="alert alert-danger" role="alert"> {err} </div>);
+    let alerts = this.state.errors.map((err, index) => <div key={index} className="alert alert-danger" role="alert"> {err} </div>);
     return (
       <div className="container">
         <div className="row">
@@ -116,6 +127,17 @@ class Register extends Component {
                   name="password"
                   placeholder="Password"
                   value={this.state.password}
+                  onChange={this.onChange}
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="confirmPassword">Confirm password</label>
+                <input
+                  type="password"
+                  className="form-control"
+                  name="confirmPassword"
+                  placeholder="Password"
+                  value={this.state.confirmPassword}
                   onChange={this.onChange}
                 />
               </div>

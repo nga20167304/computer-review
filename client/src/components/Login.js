@@ -49,7 +49,7 @@ class Login extends Component {
   }
 
   render() {
-    let alerts = this.state.errors.map(err => <div className="alert alert-danger" role="alert"> {err} </div>);
+    let alerts = this.state.errors.map((err, index) => <div key={index} className="alert alert-danger" role="alert"> {err} </div>);
     return (
       <div className="container">
         <div className="row">
