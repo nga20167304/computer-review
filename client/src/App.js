@@ -10,15 +10,6 @@ import Profile from './components/Profile'
 
 
 class App extends Component{
-  // state = {
-  //   greeting: ''
-  // }
-
-  // componentDidMount(){
-  //   axios.get('/api/helloworld')
-  //     .then(result => this.setState({greeting: result.data.sayHi}));
-  // }
-
   render() {
     return (
       <Router>

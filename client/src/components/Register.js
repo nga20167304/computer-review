@@ -37,10 +37,6 @@ class Register extends Component {
     if(!reg.test(user.email)){
       validateErrs.push('Email invalid!');
     }
-
-    if(this.state.password.length < 8){
-      validateErrs.push('Password invalid. Password must be over 8 characters');
-    }
     
     if(this.state.password !== this.state.confirmPassword){
       validateErrs.push('Confirm password wrong!');
