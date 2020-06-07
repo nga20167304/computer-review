@@ -41,31 +41,36 @@ class Navbar extends Component {
 
     return (
       <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-        <button
-          className="navbar-toggler"
-          type="button"
-          data-toggle="collapse"
-          data-target="#navbar1"
-          aria-controls="navbar1"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span className="navbar-toggler-icon" />
-        </button>
+          <button
+            className="navbar-toggler"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbar1"
+            aria-controls="navbar1"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <span className="navbar-toggler-icon" />
+          </button>
 
-        <div
-          className="collapse navbar-collapse justify-content-md-center"
-          id="navbar1"
-        >
-          <ul className="navbar-nav">
-            <li className="nav-item">
-              <Link to="/" className="nav-link">
-                Home
+          <div
+            className="collapse navbar-collapse"
+            id="navbar1"
+            style={{display: "flex", justifyContent: "space-between"}}
+          >
+            <div>
+            <ul className="navbar-nav">
+              <li className="nav-item">
+                <Link to="/" className="nav-link">
+                  Home
               </Link>
-            </li>
-          </ul>
-          {localStorage.usertoken ? userLink : loginRegLink}
-        </div>
+              </li>
+            </ul>
+            </div>
+            <div>
+               {localStorage.usertoken ? userLink : loginRegLink}
+            </div>
+          </div>
       </nav>
     )
   }
