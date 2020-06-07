@@ -12,6 +12,8 @@ app.use(
   })
 )
 
+app.use(express.static('public'))
+
 var Users = require('./routes/Users')
 
 app.use('/users', Users)
