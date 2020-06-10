@@ -1,5 +1,8 @@
 import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
+import 'bootstrap/dist/css/bootstrap.min.css';
+// import { Dropdown, ButtonGroup, Button, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
+import { Dropdown } from 'react-bootstrap'
 
 class Navbar extends Component {
   logOut(e) {
@@ -26,7 +29,30 @@ class Navbar extends Component {
 
     const userLink = (
       <ul className="navbar-nav">
-        <li className="nav-item">
+       {/* <Dropdown as={ButtonGroup}> 
+        <Button variant="success">User</Button>
+
+        <DropdownToggle split variant="success" id="dropdown-split-basic" />
+
+        <DropdownMenu>
+          <DropdownItem href="/profile">User</DropdownItem>
+          <DropdownItem href=""><Link to="/profile" className="nav-link">
+            User
+          </Link></DropdownItem>
+          <DropdownItem href="#/action-3">Something else</DropdownItem>
+        </DropdownMenu>
+      </Dropdown> */}
+      <Dropdown>
+  <Dropdown.Toggle variant="success" id="dropdown-basic">
+    User
+  </Dropdown.Toggle>
+
+  <Dropdown.Menu>
+    <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+    <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+  </Dropdown.Menu>
+</Dropdown>
+        {/* <li className="nav-item">
           <Link to="/profile" className="nav-link">
             User
           </Link>
@@ -35,7 +61,7 @@ class Navbar extends Component {
           <a href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)} className="nav-link">
             Logout
           </a>
-        </li>
+        </li> */}
       </ul>
     )
 

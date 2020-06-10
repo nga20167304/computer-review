@@ -17,9 +17,14 @@ users.use(cors())
 process.env.SECRET_KEY = 'secret'
 
 users.post('/register',upload.single('image'), (req, res) => {
+
   console.log('req file ',req.file);
   if(req.file){
-    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+    //link image for window
+    // req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+
+    //link image for mac
+    req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }else{
     req.body.image = '/uploads/default';
   }
@@ -29,6 +34,7 @@ users.post('/register',upload.single('image'), (req, res) => {
       email: req.body.email
     }
   }).then(user => {
+    
       if (!user) {
         const userData = {
           name: req.body.name,
@@ -36,6 +42,7 @@ users.post('/register',upload.single('image'), (req, res) => {
           password: md5(req.body.password),
           image: req.body.image
         }
+        
         User.create(userData)
           .then(user => {
             res.json({errs: []});

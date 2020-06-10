@@ -5,6 +5,7 @@ npm install jsonwebtoken --save
 npm install bcrypt
 npm install --save sequelize
 npm install mysql2 --save
+npm i multer
 node index.js
 
 Run client
