@@ -1,7 +1,7 @@
 export default {
     products: [
       {
-        _id: '1',
+        id: '1',
         name: 'Macbook',
         category: 'Apple',
         image: '/images/mac.jpg',
@@ -11,7 +11,7 @@ export default {
         numReviews: 5
       },
       {
-        _id: '2',
+        id: '2',
         name: 'Macbook',
         category: 'Apple',
         image: '/images/mac.jpg',
@@ -21,7 +21,7 @@ export default {
         numReviews: 5
       },
       {
-        _id: '3',
+        id: '3',
         name: 'Macbook',
         category: 'Apple',
         image: '/images/mac.jpg',
@@ -30,7 +30,7 @@ export default {
         rating: 4.2,
         numReviews: 5
       }, {
-        _id: '4',
+        id: '4',
         name: 'Macbook',
         category: 'Apple',
         image: '/images/mac.jpg',

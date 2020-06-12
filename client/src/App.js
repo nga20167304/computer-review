@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 // import axios from 'axios';
 import './App.css'
-import data from './data'
+import HomeScreen from './screens/HomeScreen'
+import ProductScreen from './screens/ProductScreen'
 
 import Navbar from './components/Navbar'
 import Landing from './components/Landing'
@@ -35,7 +36,7 @@ function App() {
               <button onClick={openMenu}>
                 &#9776;
               </button>
-              <a href="index.html">Menu</a>
+              <Link to = "/" >Menu</Link>
             </div>
             <div className="header-links">
               <a href="cart.html">Login</a>
@@ -58,23 +59,9 @@ function App() {
           </aside>
           <main className="main">
             <div className="content">
-              <ul className="products">
-                {
-                  data.products.map( product => 
-                    <li>
-                      <div className="product">
-                        <img className="product-image" src={product.image} alt="product" />
-                        <div className="product-name">
-                          <a href="product.html">{product.name}</a>
-                        </div>
-                        <div className="product-brand">{product.brand}</div>
-                        <div className="product-price">{product.price}</div>
-                        <div className="product-rating">{product.rating} Stars ({product.numReviews})</div>
-                      </div>
-                    </li>
-                    )
-                }
-              </ul>
+              <Route path = "/product/:id" component = { ProductScreen } />
+              <Route path = "/" exact = {true} component = { HomeScreen }/> 
+              
             </div>
 
           </main>
