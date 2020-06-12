@@ -19,9 +19,9 @@ process.env.SECRET_KEY = 'secret'
 users.post('/register',upload.single('image'), (req, res) => {
   console.log('req file ',req.file);
   if(req.file){
-    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+    req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }else{
-    req.body.image = '/uploads/default';
+    req.body.image = '/uploads/0e0a2b029b5b3116500043d49c2d2659';
   }
   console.log('req body img ',req.body.image);
   User.findOne({
