@@ -13,9 +13,7 @@ import Profile from './components/Profile'
 import Sidebar from './components/Sidebar'
 
 function App() {
-  const openMenu = () => {
-    document.querySelector(".sidebar").classList.add("open");
-  }
+  
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
@@ -30,19 +28,10 @@ function App() {
             <Route exact path="/profile" component={Profile} />
           </div>
         </div> */}
+        <Navbar />
+            
         <div className="grid-container">
-          <header className="header">
-            <div className="brand">
-              <button onClick={openMenu}>
-                &#9776;
-              </button>
-              <Link to = "/" >Menu</Link>
-            </div>
-            <div className="header-links">
-              <a href="cart.html">Login</a>
-              <a href="signin.html">Register</a>
-            </div>
-          </header>
+          
           <aside className="sidebar">
             <h3>Home</h3>
             <button className="sidebar-close-button" onClick={closeMenu}>x</button>
@@ -61,7 +50,9 @@ function App() {
             <div className="content">
               <Route path = "/product/:id" component = { ProductScreen } />
               <Route path = "/" exact = {true} component = { HomeScreen }/> 
-              
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
             </div>
 
           </main>

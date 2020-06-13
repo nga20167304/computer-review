@@ -21,10 +21,10 @@ users.post('/register',upload.single('image'), (req, res) => {
   console.log('req file ',req.file);
   if(req.file){
     //link image for window
-    // req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
 
     //link image for mac
-    req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
+    // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }else{
     req.body.image = '/uploads/default';
   }
@@ -56,6 +56,58 @@ users.post('/register',upload.single('image'), (req, res) => {
       }
     }).catch(err => {
       res.send('error: ' + err);
+      })
+})
+
+users.put('/update', upload.single('image'), (req, res) => {
+
+  const userData = {
+    id: req.body.id,
+  }
+
+  console.log('req file ',req.file);
+  if(req.file){
+    //link image for window
+    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+
+    //link image for mac
+    // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
+  }
+  console.log('req body img ',req.body.image);
+  
+  if(req.body.name) {
+    userData['name'] = req.body.name;
+  }
+  if(req.body.image) {
+    userData['image'] = req.body.image;
+  }
+  if(req.body.password) {
+    userData['password'] = md5(req.body.password);
+  }
+        
+  User.update(userData, {where: {id: userData.id}})
+    .then(result => {
+      User.findOne({
+        where: {
+          id: userData.id
+        }
+      }).then(user => {
+          if (user) {
+            let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+              expiresIn: 1440
+            })
+            res.send(token);
+          } else {
+            res.send('User does not exist')
+          }
+        })
+        .catch(err => {
+            res.send('error: ' + err)
+          })
+    })
+    .catch(err => {
+        if(req.file) unlinkAsync(req.file.path);
+        res.send('error: ' + err);
       })
 })
 
