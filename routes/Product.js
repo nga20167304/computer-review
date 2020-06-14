@@ -5,5 +5,7 @@ module.exports = function(app) {
     app.route('/products')
         .get(ProductController.list_all_products)
         .post(ProductController.create_a_product);
- 
+    
+    app.route('/products/:productId')
+        .get(ProductController.read_a_product)
  };

@@ -45,18 +45,20 @@ class createProduct extends Component {
 
   
   render() {
-    let alerts =this.state.alert===''?<div></div> : <div className="alert alert-success alert-dismissible fade show" role="alert"> 
-                                                        {this.state.alert} 
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>;
+    let alerts =this.state.alert===''?<div></div> : 
+            <div className="alert alert-success alert-dismissible fade show" role="alert"> 
+                {this.state.alert} 
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>;
+
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
             {alerts}
-            <form noValidate onSubmit={this.onSubmit}>
+            <form noValidate onSubmit={this.onSubmit} className="create-product">
               <h1 >Create new product</h1>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -81,7 +83,7 @@ class createProduct extends Component {
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="rating">rating</label>
+                <label htmlFor="rating">Rating</label>
                 <input
                   type="number"
                   className="form-control"

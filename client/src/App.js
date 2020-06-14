@@ -63,10 +63,9 @@ function App() {
           <main className="main">
             <div className="content">
               <Route path = "/product/:id" component = { ProductScreen } />
-              <Route path = "/" exact = {true} component = { HomeScreen }/> 
+              <Route path = "/" exact = {true} component = { HomeScreen }/>
               <Route path = "/create" component = { createProduct } />
             </div>
-
           </main>
           <footer className="footer">
             Team 4 ITSS Japanese

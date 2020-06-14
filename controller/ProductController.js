@@ -24,3 +24,11 @@ exports.create_a_product = function(req, res) {
         }
     });
 };
+
+exports.read_a_product = function(req, res) {
+    Product.getProductById(req.params.productId, function(err, product) {
+        if (err)
+            res.send(err);
+        res.send(product);
+    });
+};

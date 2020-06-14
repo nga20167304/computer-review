@@ -2,7 +2,10 @@ const db = require('../database/db.js')
 
 var Product = function (product){
   console.log(product);
+  this.id = product.id
   this.name = product.name;
+  this.brand = product.brand;
+  this.description = product.description;
   this.price = product.price;
   this.rating = product.rating;
 };
@@ -31,6 +34,19 @@ Product.getAllProduct = function getAllProduct(result) {
           console.log('tasks : ', res);
 
           result(null, res);
+      }
+  });
+};
+
+Product.getProductById = function getAProduct(productId, result) {
+  db.connection.query("Select * from product where id = ? ", productId, function (err, res) {
+      if(err) {
+          console.log("error: ", err);
+          result(err, null);
+      }
+      else{
+          result(null, res);
+
       }
   });
 };
