@@ -56,7 +56,7 @@ class ProductScreen extends Component {
             </li>
             <li>
               Description:
-              <div>
+              <div className="product-description">
                 {this.state.description}
               </div>
             </li>

@@ -110,6 +110,11 @@ a:hover{
   font-size: 2rem;
   font-weight: bold;
 }
+.product-description{
+  font-size: 14px;
+  /* font-weight: bold; */
+  color: #848484;
+}
 .product-image{
   max-width: 34rem;
   max-height: 34rem;
