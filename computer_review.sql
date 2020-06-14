@@ -94,10 +94,12 @@ INSERT INTO `board` (`id`, `chip`, `bus`, `ram`) VALUES
 
 DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
-  `image` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
 
 --
 -- Dumping data for table `brand`
@@ -184,26 +186,27 @@ CREATE TABLE `hard_disk` (
 
 DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
-  `id` int(11) NOT NULL,
-  `name` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `price` varchar(45) NOT NULL,
-  `rating` int(11) DEFAULT 0,
-  `description` varchar(45) DEFAULT NULL,
-  `image` varchar(45) DEFAULT NULL,
-  `web_id` int(11) DEFAULT NULL,
+  `rating` int(11) NULL DEFAULT 0,
+  `description` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `web_id` int(11) NULL DEFAULT NULL,
   `brand_id` int(11) NOT NULL,
-  `cpu_id` int(11) DEFAULT NULL,
-  `board_id` int(11) DEFAULT NULL,
-  `ram_id` int(11) DEFAULT NULL,
-  `harddisk_id` int(11) DEFAULT NULL,
-  `graphics_id` int(11) DEFAULT NULL,
-  `screen_id` int(11) DEFAULT NULL,
-  `program_id` int(11) DEFAULT NULL,
-  `battery_id` int(11) DEFAULT NULL,
-  `size_and_weight_id` int(11) DEFAULT NULL,
-  `security_id` int(11) DEFAULT NULL,
-  `brand` varchar(45) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `cpu_id` int(11) NULL DEFAULT NULL,
+  `board_id` int(11) NULL DEFAULT NULL,
+  `ram_id` int(11) NULL DEFAULT NULL,
+  `harddisk_id` int(11) NULL DEFAULT NULL,
+  `graphics_id` int(11) NULL DEFAULT NULL,
+  `screen_id` int(11) NULL DEFAULT NULL,
+  `program_id` int(11) NULL DEFAULT NULL,
+  `battery_id` int(11) NULL DEFAULT NULL,
+  `size_and_weight_id` int(11) NULL DEFAULT NULL,
+  `security_id` int(11) NULL DEFAULT NULL,
+  `brand` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -220,7 +223,6 @@ CREATE TABLE `ram` (
   `slots` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
 
 --
 -- Table structure for table `screen`
