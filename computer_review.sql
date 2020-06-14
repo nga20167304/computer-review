@@ -123,6 +123,7 @@ CREATE TABLE `product` (
   `battery_id` int(11) NULL DEFAULT NULL,
   `size_and_weight_id` int(11) NULL DEFAULT NULL,
   `security_id` int(11) NULL DEFAULT NULL,
+  `brand` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

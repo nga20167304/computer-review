@@ -6,9 +6,12 @@ class createProduct extends Component {
     super()
     this.state = {
       name: '',
+      brand: '',
+      description: '',
       price: '',
       rating: 0,
-      alert:''
+      alert:'',
+      status: 0
     }
     this.onChange = this.onChange.bind(this)
     this.onSubmit = this.onSubmit.bind(this)
@@ -19,44 +22,64 @@ class createProduct extends Component {
   }
   onSubmit(e) {
     e.preventDefault()
-    console.log("name = " +this.state.name);
-    console.log("price = " +this.state.price);
-    console.log("rating = " +this.state.rating);
     const newProduct = {
       name: this.state.name,
+      brand: this.state.brand,
+      description: this.state.description,
       price: this.state.price,
       rating: this.state.rating
+    }
+    if(this.state.name==='' || this.state.brand==='' || this.state.description===''
+    || this.state.price===''||this.state.rating===0){
+      this.setState({alert:"There is an empty attribute!"})
+      return false;
     }
     axios.post(`http://localhost:5000/products`, newProduct )
       .then(res => {
         console.log("new product: " + newProduct);
         console.log("res = " +res);
         console.log(res.data);
-        this.setState({alert: "Success!!!"})
+        this.setState({alert: "Success!!!", status:1})
       })
-      .catch(err => console.log(err))
+      .catch(err => {
+          console.log(err);
+          this.setState({alert: err})
+          return false;
+      })
 
     this.setState({
         name: '',
+        brand: '',
+        description: '',
         price: '',
-        rating: ''
+        rating: '',
+        status:0
     })
 }
 
   
   render() {
-    let alerts =this.state.alert===''?<div></div> : <div className="alert alert-success alert-dismissible fade show" role="alert"> 
-                                                        {this.state.alert} 
-                                                        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-                                                            <span aria-hidden="true">&times;</span>
-                                                        </button>
-                                                        </div>;
+    let alerts =this.state.alert===''?<div></div> : this.state.status===1?
+            (<div className="alert alert-success alert-dismissible fade show" role="alert"> 
+                {this.state.alert} 
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>):
+            (<div className="alert alert-danger alert-dismissible fade show" role="alert"> 
+                {this.state.alert} 
+            <button type="button" className="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>)
+            ;
+
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
             {alerts}
-            <form noValidate onSubmit={this.onSubmit}>
+            <form noValidate onSubmit={this.onSubmit} className="create-product">
               <h1 >Create new product</h1>
               <div className="form-group">
                 <label htmlFor="name">Name</label>
@@ -67,6 +90,31 @@ class createProduct extends Component {
                   placeholder="Enter product's name"
                   value={this.state.name}
                   onChange={this.onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="brand">Brand</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="brand"
+                  placeholder="brand"
+                  value={this.state.brand}
+                  onChange={this.onChange}
+                  required
+                />
+              </div>
+              <div className="form-group">
+                <label htmlFor="description">Description</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  name="description"
+                  placeholder="Description"
+                  value={this.state.description}
+                  onChange={this.onChange}
+                  required
                 />
               </div>
               <div className="form-group">
@@ -78,10 +126,11 @@ class createProduct extends Component {
                   placeholder="price"
                   value={this.state.price}
                   onChange={this.onChange}
+                  required
                 />
               </div>
               <div className="form-group">
-                <label htmlFor="rating">rating</label>
+                <label htmlFor="rating">Rating</label>
                 <input
                   type="number"
                   className="form-control"
@@ -89,6 +138,7 @@ class createProduct extends Component {
                   placeholder="rating"
                   value={this.state.rating}
                   onChange={this.onChange}
+                  required
                 />
               </div>
               <button

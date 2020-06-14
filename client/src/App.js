@@ -18,6 +18,9 @@ function App() {
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
+  const openMenu = () => {
+    document.querySelector(".sidebar").classList.add("open")
+  }
     return (
       <Router>
         {/* <div classNameName="App">
@@ -29,7 +32,7 @@ function App() {
             <Route exact path="/profile" component={Profile} />
           </div>
         </div> */}
-        <Navbar />
+        {/* <Navbar /> */}
             
         <div className="grid-container">
           <header className="header">
@@ -63,13 +66,12 @@ function App() {
           <main className="main">
             <div className="content">
               <Route path = "/product/:id" component = { ProductScreen } />
-              <Route path = "/" exact = {true} component = { HomeScreen }/> 
+              <Route exact path = "/" exact = {true} component = { HomeScreen }/>
               <Route path = "/create" component = { createProduct } />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/profile" component={Profile} />
+              <Route  path="/register" component={Register} />
+              <Route  path="/login" component={Login} />
+              <Route  path="/profile" component={Profile} />
             </div>
-
           </main>
           <footer className="footer">
             Team 4 ITSS Japanese
