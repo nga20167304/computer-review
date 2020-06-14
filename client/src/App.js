@@ -14,9 +14,7 @@ import Sidebar from './components/Sidebar'
 import createProduct from './components/products/createProduct';
 
 function App() {
-  const openMenu = () => {
-    document.querySelector(".sidebar").classList.add("open");
-  }
+  
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
@@ -31,6 +29,8 @@ function App() {
             <Route exact path="/profile" component={Profile} />
           </div>
         </div> */}
+        <Navbar />
+            
         <div className="grid-container">
           <header className="header">
             <div className="brand">
@@ -65,6 +65,9 @@ function App() {
               <Route path = "/product/:id" component = { ProductScreen } />
               <Route path = "/" exact = {true} component = { HomeScreen }/>
               <Route path = "/create" component = { createProduct } />
+              <Route exact path="/register" component={Register} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/profile" component={Profile} />
             </div>
           </main>
           <footer className="footer">
