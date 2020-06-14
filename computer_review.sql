@@ -25,7 +25,7 @@ DROP TABLE IF EXISTS `brand`;
 CREATE TABLE `brand` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
+  `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -107,21 +107,22 @@ DROP TABLE IF EXISTS `product`;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `price` int(11) NOT NULL,
-  `description` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `web_id` int(11) NOT NULL,
+  `price` varchar(45) NOT NULL,
+  `rating` int(11) NULL DEFAULT 0,
+  `description` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
+  `web_id` int(11) NULL DEFAULT NULL,
   `brand_id` int(11) NOT NULL,
-  `cpu_id` int(11) NOT NULL,
-  `board_id` int(11) NOT NULL,
-  `ram_id` int(11) NOT NULL,
-  `harddisk_id` int(11) NOT NULL,
-  `graphics_id` int(11) NOT NULL,
-  `screen_id` int(11) NOT NULL,
-  `program_id` int(11) NOT NULL,
-  `battery_id` int(11) NOT NULL,
-  `size_and_weight_id` int(11) NOT NULL,
-  `security_id` int(11) NOT NULL,
+  `cpu_id` int(11) NULL DEFAULT NULL,
+  `board_id` int(11) NULL DEFAULT NULL,
+  `ram_id` int(11) NULL DEFAULT NULL,
+  `harddisk_id` int(11) NULL DEFAULT NULL,
+  `graphics_id` int(11) NULL DEFAULT NULL,
+  `screen_id` int(11) NULL DEFAULT NULL,
+  `program_id` int(11) NULL DEFAULT NULL,
+  `battery_id` int(11) NULL DEFAULT NULL,
+  `size_and_weight_id` int(11) NULL DEFAULT NULL,
+  `security_id` int(11) NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;

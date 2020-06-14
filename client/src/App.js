@@ -11,6 +11,7 @@ import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
 import Sidebar from './components/Sidebar'
+import createProduct from './components/products/createProduct';
 
 function App() {
   const openMenu = () => {
@@ -41,8 +42,10 @@ function App() {
             <div className="header-links">
               <a href="cart.html">Login</a>
               <a href="signin.html">Register</a>
+              <Link to="/create">Add product</Link>
             </div>
           </header>
+
           <aside className="sidebar">
             <h3>Home</h3>
             <button className="sidebar-close-button" onClick={closeMenu}>x</button>
@@ -61,7 +64,7 @@ function App() {
             <div className="content">
               <Route path = "/product/:id" component = { ProductScreen } />
               <Route path = "/" exact = {true} component = { HomeScreen }/> 
-              
+              <Route path = "/create" component = { createProduct } />
             </div>
 
           </main>
