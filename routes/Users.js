@@ -20,13 +20,14 @@ users.post('/register',upload.single('image'), (req, res) => {
 
   console.log('req file ',req.file);
   if(req.file){
+
     //link image for window
     req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
 
     //link image for mac
     // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }else{
-    req.body.image = '/uploads/default';
+    req.body.image = '/uploads/0e0a2b029b5b3116500043d49c2d2659';
   }
   console.log('req body img ',req.body.image);
   User.findOne({
