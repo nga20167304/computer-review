@@ -27,6 +27,9 @@ class Navbar extends Component {
               Register
             </Link>
         </li>
+        <li className="nav-item">
+          <Link to="/create" className="nav-link">Add product</Link>
+        </li>
       </ul>
     )
 
@@ -104,7 +107,7 @@ class Navbar extends Component {
           <div
             className="collapse navbar-collapse"
             id="navbar1"
-            style={{display: "flex", justifyContent: "flex-end", fontSize: "1.6em"}}
+            style={{display: "flex", justifyContent: "flex-end", fontSize: "1em", alignItems: "center"}}
           >
             <div>
                {localStorage.usertoken ? userLink : loginRegLink}

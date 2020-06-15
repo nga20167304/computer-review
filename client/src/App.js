@@ -32,10 +32,11 @@ function App() {
             <Route exact path="/profile" component={Profile} />
           </div>
         </div> */}
-        {/* <Navbar /> */}
+        
             
         <div className="grid-container">
-          <header className="header">
+        <Navbar />
+          {/* <header className="header">
             <div className="brand">
               <button onClick={openMenu}>
                 &#9776;
@@ -47,7 +48,7 @@ function App() {
               <a href="signin.html">Register</a>
               <Link to="/create">Add product</Link>
             </div>
-          </header>
+          </header> */}
 
           <aside className="sidebar">
             <h3>Home</h3>
