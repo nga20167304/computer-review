@@ -32,9 +32,10 @@ function App() {
             <Route exact path="/profile" component={Profile} />
           </div>
         </div> */}
-        {/* <Navbar /> */}
+        
             
         <div className="grid-container">
+        {/* <Navbar /> */}
           <header className="header">
             <div className="brand">
               <button onClick={openMenu}>
