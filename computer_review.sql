@@ -190,6 +190,7 @@ CREATE TABLE `product` (
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `price` varchar(45) NOT NULL,
   `rating` int(11) NULL DEFAULT 0,
+--  `imgUrl` varchar(100) NULL DEFAULT NULL,
   `description` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `web_id` int(11) NULL DEFAULT NULL,

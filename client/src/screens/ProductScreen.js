@@ -13,6 +13,7 @@ class ProductScreen extends Component {
   constructor(props){
     super(props)
     this.state ={
+      id: '',
       name:'',
       rating:'',
       price:'',
@@ -28,6 +29,7 @@ class ProductScreen extends Component {
     axios.get(`http://localhost:5000/products/${productId}`, null)
       .then(res => {
         this.setState({
+          id: res.data[0].id,
           name: res.data[0].name,
           rating: res.data[0].rating,
           price: res.data[0].price,
@@ -49,9 +51,9 @@ class ProductScreen extends Component {
     console.log(this.props.match.params.id)
     console.log(this.state)
     return (<div>
-      <div className = "back">
-        <Link to = "/" > Back </Link>
-      </div>
+      <Button>
+        <Link to = "/" >Back</Link>
+      </Button>
 
       <div className = "details">
         <div className = "details-image">
@@ -75,8 +77,8 @@ class ProductScreen extends Component {
               </div>
             </li>
           </ul>
-          <Button variant="dark" style={{width: '50%'}} onClick={()=>browserHistory.push(`/computer/${this.props.id}/sosanh/`)}>
-            Sosanh...
+          <Button variant="dark" style={{width: '50%'}}>
+            <Link to={'/compare/' + this.state.id}> So sánh...</Link>
           </Button>
         </div>
       </div>
@@ -87,8 +89,8 @@ class ProductScreen extends Component {
               <ListCommentComponent
                   key={index}
                   comment={item.comment}
-                  onToDoDelete={() => this.handleDeleteToDo(index)}
-              />
+                  onToDoDelete={() => this.handleDeleteToDo(index)}/>
+
           );
         })}
       </div>

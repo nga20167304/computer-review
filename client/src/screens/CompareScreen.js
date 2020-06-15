@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 // import data from '../data';
-import {Link} from 'react-router-dom'
 import axios from 'axios'
+import { faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {Link} from "react-router-dom";
 import '../template/style.css';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-
+import {Button} from "react-bootstrap";
 
 function searchingFor(term) {
     return function (x) {
@@ -13,27 +13,37 @@ function searchingFor(term) {
     };
 }
 
-class HomeScreen extends Component {
-
+class CompareScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
+            id: '',
+            name: '',
+            rating: '',
+            price: '',
+            description: '',
             listProduct: [],
             term: "",
-        }
+        };
+        this.id = props.match.params.id;
         this.searchHandler = this.searchHandler.bind(this);
     }
 
-    handleClick = () => {
-        console.log(this.props);
-        this.props.history.push(this.props.id)
-    }
-
-    searchHandler(event) {
-        this.setState({term: event.target.value});
-    }
-
     componentDidMount() {
+        const productId = this.props.match.params.id;
+        axios.get(`http://localhost:5000/compare/${productId}`, null)
+            .then(res => {
+                this.setState({
+                    name: res.data[0].name,
+                    rating: res.data[0].rating,
+                    price: res.data[0].price,
+                    description: res.data[0].description
+                })
+                console.log(this.state)
+            })
+
+            .catch(err => console.log(err))
+
         axios.get(`http://localhost:5000/products`, null)
             .then(res => {
                 console.log("res = " + res);
@@ -43,9 +53,16 @@ class HomeScreen extends Component {
                 })
             })
             .catch(err => console.log(err))
+
+    }
+
+    searchHandler(event) {
+        this.setState({term: event.target.value});
     }
 
     render() {
+        console.log(this.state.id)
+        console.log(this.state)
         const listProduct = this.state.listProduct.map(product =>
             <li key={product.id}>
                 <div className="product shadow">
@@ -76,28 +93,31 @@ class HomeScreen extends Component {
                         />
                     </div>
                 </div>
-                <div style={{flexWrap: 'wrap',
+                <div style={{
+                    flexWrap: 'wrap',
                     display: "flex",
-                    justifyContent: 'center'}}>
+                    justifyContent: 'center'
+                }}>
                     {
                         this.state.listProduct
                             .filter(searchingFor(this.state.term))
                             .map((product, index) => {
                                 return (
-                                        <div key={product.id} className="product shadow">
-                                            <Link to={'/product/' + product.id}>
-                                                <img className="product-image" src='/images/mac.jpg' alt="product"/>
-                                            </Link>
-                                            <div style={{paddingTop : "2rem"}} className="product-name">
-                                                <Link to={'/product/' + product.id}>{product.name}</Link>
-                                            </div>
-                                            <div className="product-brand">{product.brand}</div>
-                                            <div className="product-price">${product.price}</div>
-                                            <div className="product-description">{product.description}</div>
-                                            <div className="product-rating">{product.rating}
-                                                <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
-                                            </div>
-                                        </div>)
+                                    <div key={product.id} className="product shadow">
+                                        <img className="product-image" src='/images/mac.jpg' alt="product"/>
+                                        <div style={{paddingTop: "2rem"}} className="product-name">
+                                            {product.name}
+                                        </div>
+                                        <div className="product-brand">{product.brand}</div>
+                                        <div className="product-price">${product.price}</div>
+                                        <div className="product-description">{product.description}</div>
+                                        <div className="product-rating">{product.rating}
+                                            <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
+                                        </div>
+                                        <Button>
+                                            <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
+                                        </Button>
+                                    </div>)
                             })}
                 </div>
             </div>
@@ -106,4 +126,4 @@ class HomeScreen extends Component {
 }
 
 
-export default HomeScreen;
+export default CompareScreen;
