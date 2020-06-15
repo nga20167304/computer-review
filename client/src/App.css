@@ -9,26 +9,74 @@
 
 
 /* create Product */
-.create-product{
+.form-input{
   font-size: 16px;
   margin: 10px;
 }
-.create-product h1{
+.form-input h1{
   color: #007bff;
   margin-bottom: 20px;
 }
 
-.create-product label{
+.form-input label{
   margin: 5px;
 }
-.create-product input{
+.form-input input{
   margin: 5px 0px;
   height: 30px;
   font-size: 16px;
 }
 
-.create-product button{
+.form-input button{
   font-size: 16px;
   font-weight: bold;
   margin: 30px 0px;
+}
+
+/* Home Screen */
+.searchbar{
+  height: 40px !important;
+  margin: 20px 300px;
+  font-size: 16px !important;
+  padding: 10px 15px !important;
+}
+
+/* Product Screen */
+.button{
+  font-size: 14px !important;
+  margin: 10px;
+}
+.button a{
+  color: #ffffff;
+}
+
+.button a:hover{
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: none;
+}
+.back-button{
+  width: 55px;
+}
+
+/* Comment Box */
+textarea{
+  font-size: 14px !important;
+}
+.comment-button{
+  margin-left: 0px;
+}
+.comments{
+  font-size: 16px;
+  font-weight: bold;
+  color: #007bff;
+  border-top: 1px solid #e6e6e6;
+  padding: 10px;
+}
+
+
+/* Profile */
+.profile{
+  color: #007bff;
 }

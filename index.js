@@ -17,11 +17,9 @@ app.use(
 app.use(express.static('public'))
 
 var Users = require('./routes/Users')
-// var Product = require('./routes/Product')
 routes(app);
 
 app.use('/users', Users)
-// app.use('/products', Product)
 
 app.get('/', (req, res) => {
    res.send('hello from server!')
@@ -30,7 +28,7 @@ app.get('/', (req, res) => {
 app.get('/api/helloworld', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
- 
+
 app.listen(5000, () => {
    console.log('App listening on port 5000')
 })
@@ -41,7 +39,7 @@ var mysql = require('mysql');
 var con = mysql.createConnection({
    host: "localhost",
    user: "root",
-   password: "phuonganh123",
+   password: "",
    database: "computer_review"
  });
 

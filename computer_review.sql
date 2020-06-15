@@ -1,114 +1,196 @@
--- MySQL dump 10.13  Distrib 8.0.18, for osx10.14 (x86_64)
+-- phpMyAdmin SQL Dump
+-- version 4.9.2
+-- https://www.phpmyadmin.net/
 --
--- Host: localhost    Database: computer_review
--- ------------------------------------------------------
--- Server version	8.0.18
+-- Host: localhost
+-- Generation Time: Jun 14, 2020 at 12:44 PM
+-- Server version: 10.4.11-MariaDB
+-- PHP Version: 7.4.1
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
+
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `computer_review`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `available_programs`
+--
+
+DROP TABLE IF EXISTS `available_programs`;
+CREATE TABLE `available_programs` (
+  `id` int(8) NOT NULL,
+  `operating_system` varchar(255) NOT NULL,
+  `used_by_software` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `available_programs`
+--
+
+INSERT INTO `available_programs` (`id`, `operating_system`, `used_by_software`) VALUES
+(1, 'win10', 'microsoft'),
+(2, 'win8', 'microsoft'),
+(3, 'linux', 'linux'),
+(4, 'ubuntu', 'linux');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `battery`
+--
+
+DROP TABLE IF EXISTS `battery`;
+CREATE TABLE `battery` (
+  `id` int(8) NOT NULL,
+  `species` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `battery`
+--
+
+INSERT INTO `battery` (`id`, `species`, `type`) VALUES
+(1, ' 4800 mAh', ' Pin liền Lithium-ion polymer battery 7.4V - 2 cells\r\n');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `board`
+--
+
+DROP TABLE IF EXISTS `board`;
+CREATE TABLE `board` (
+  `id` int(8) NOT NULL,
+  `chip` varchar(255) NOT NULL,
+  `bus` varchar(255) NOT NULL,
+  `ram` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `board`
+--
+
+INSERT INTO `board` (`id`, `chip`, `bus`, `ram`) VALUES
+(1, ' Tích hợp', ' PCI Express v2.0', ' 3GB (onboard RAM)');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `brand`
 --
 
 DROP TABLE IF EXISTS `brand`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `brand` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
 
 --
 -- Dumping data for table `brand`
 --
 
-LOCK TABLES `brand` WRITE;
-/*!40000 ALTER TABLE `brand` DISABLE KEYS */;
-/*!40000 ALTER TABLE `brand` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `brand` (`id`, `name`, `image`) VALUES
+(1, 'DELL', NULL),
+(2, 'ASUS', ''),
+(3, 'HP', NULL),
+(4, 'ACER', NULL),
+(5, 'Lenovo', NULL);
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `cpu`
 --
 
 DROP TABLE IF EXISTS `cpu`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `cpu` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `brand` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `technology` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `type` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `speed` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `cache` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `max_speed` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `brand` varchar(45) NOT NULL,
+  `technology` varchar(45) NOT NULL,
+  `type` varchar(45) NOT NULL,
+  `speed` varchar(45) NOT NULL,
+  `cache` varchar(45) NOT NULL,
+  `max_speed` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `cpu`
 --
 
-LOCK TABLES `cpu` WRITE;
-/*!40000 ALTER TABLE `cpu` DISABLE KEYS */;
-/*!40000 ALTER TABLE `cpu` ENABLE KEYS */;
-UNLOCK TABLES;
+INSERT INTO `cpu` (`id`, `brand`, `technology`, `type`, `speed`, `cache`, `max_speed`) VALUES
+(1, ' Intel Celeron N3350', ' Celeron', ' N3350', ' 1.1 GHz', '2MB Cache', ' 2.4 GHz');
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `evaluation`
 --
 
 DROP TABLE IF EXISTS `evaluation`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `evaluation` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `id` int(11) NOT NULL,
   `product_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `content` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `vote` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`),
-  KEY `user_id_idx` (`user_id`),
-  KEY `product_id_idx` (`product_id`),
-  CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
-  CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `content` varchar(45) NOT NULL,
+  `vote` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `evaluation`
+-- Table structure for table `graphics`
 --
 
-LOCK TABLES `evaluation` WRITE;
-/*!40000 ALTER TABLE `evaluation` DISABLE KEYS */;
-/*!40000 ALTER TABLE `evaluation` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `graphics`;
+CREATE TABLE `graphics` (
+  `id` int(11) NOT NULL,
+  `chipset` int(11) NOT NULL,
+  `memory` int(11) NOT NULL,
+  `design_style` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `hard_disk`
+--
+
+DROP TABLE IF EXISTS `hard_disk`;
+CREATE TABLE `hard_disk` (
+  `id` int(8) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `capacity` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `product`
 --
 
 DROP TABLE IF EXISTS `product`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `product` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `price` varchar(45) NOT NULL,
   `rating` int(11) NULL DEFAULT 0,
+--  `imgUrl` varchar(100) NULL DEFAULT NULL,
   `description` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `web_id` int(11) NULL DEFAULT NULL,
@@ -126,75 +208,308 @@ CREATE TABLE `product` (
   `brand` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `product`
+-- Table structure for table `ram`
 --
 
-LOCK TABLES `product` WRITE;
-/*!40000 ALTER TABLE `product` DISABLE KEYS */;
-/*!40000 ALTER TABLE `product` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `ram`;
+CREATE TABLE `ram` (
+  `id` int(8) NOT NULL,
+  `weight` varchar(255) NOT NULL,
+  `type` varchar(255) NOT NULL,
+  `bus_speed` varchar(255) NOT NULL,
+  `slots` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+--
+-- Table structure for table `screen`
+--
+
+DROP TABLE IF EXISTS `screen`;
+CREATE TABLE `screen` (
+  `id` int(8) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `resolution` varchar(255) NOT NULL,
+  `technology` varchar(255) NOT NULL,
+  `sensor` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `sell_web`
 --
 
 DROP TABLE IF EXISTS `sell_web`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `sell_web` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `link` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `image` varchar(45) NOT NULL,
+  `link` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
 
 --
--- Dumping data for table `sell_web`
+-- Table structure for table `size_weight`
 --
 
-LOCK TABLES `sell_web` WRITE;
-/*!40000 ALTER TABLE `sell_web` DISABLE KEYS */;
-/*!40000 ALTER TABLE `sell_web` ENABLE KEYS */;
-UNLOCK TABLES;
+DROP TABLE IF EXISTS `size_weight`;
+CREATE TABLE `size_weight` (
+  `id` int(8) NOT NULL,
+  `size` varchar(255) NOT NULL,
+  `weight` varchar(255) NOT NULL,
+  `component` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
 
 --
 -- Table structure for table `users`
 --
 
 DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `email` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  `image` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+  `id` int(11) NOT NULL,
+  `name` varchar(45) NOT NULL,
+  `email` varchar(45) NOT NULL,
+  `password` varchar(45) NOT NULL,
+  `image` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `image`) VALUES
+(1, 'admin', 'admin@gmail.com', '12345678', ''),
+(2, 'do', 'do@gmail.com', '12345678', ''),
+(3, 'phuonganh', 'phuonganh@gmail.com', '12345678', ''),
+(4, 'anhduc', 'anhduc@gmail.com', '12345678', ''),
+(5, 'yen', 'yen@gmail.com', '12345678', ''),
+(6, 'nga', 'nga@gmail.com', '12345678', '');
 
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `web_communication`
+--
+
+DROP TABLE IF EXISTS `web_communication`;
+CREATE TABLE `web_communication` (
+  `id` int(8) NOT NULL,
+  `web_communication` varchar(255) NOT NULL,
+  `function` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Indexes for dumped tables
+--
+
+--
+-- Indexes for table `available_programs`
+--
+ALTER TABLE `available_programs`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `battery`
+--
+ALTER TABLE `battery`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `board`
+--
+ALTER TABLE `board`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `cpu`
+--
+ALTER TABLE `cpu`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `evaluation`
+--
+ALTER TABLE `evaluation`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `user_id_idx` (`user_id`),
+  ADD KEY `product_id_idx` (`product_id`);
+
+--
+-- Indexes for table `graphics`
+--
+ALTER TABLE `graphics`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `hard_disk`
+--
+ALTER TABLE `hard_disk`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `ram`
+--
+ALTER TABLE `ram`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `screen`
+--
+ALTER TABLE `screen`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `sell_web`
+--
+ALTER TABLE `sell_web`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `size_weight`
+--
+ALTER TABLE `size_weight`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `users`
+--
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `web_communication`
+--
+ALTER TABLE `web_communication`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `available_programs`
+--
+ALTER TABLE `available_programs`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `battery`
+--
+ALTER TABLE `battery`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `board`
+--
+ALTER TABLE `board`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `brand`
+--
+ALTER TABLE `brand`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `cpu`
+--
+ALTER TABLE `cpu`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `evaluation`
+--
+ALTER TABLE `evaluation`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `graphics`
+--
+ALTER TABLE `graphics`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `hard_disk`
+--
+ALTER TABLE `hard_disk`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `product`
+--
+ALTER TABLE `product`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `ram`
+--
+ALTER TABLE `ram`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `screen`
+--
+ALTER TABLE `screen`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `sell_web`
+--
+ALTER TABLE `sell_web`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `size_weight`
+--
+ALTER TABLE `size_weight`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
+-- AUTO_INCREMENT for table `web_communication`
+--
+ALTER TABLE `web_communication`
+  MODIFY `id` int(8) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `evaluation`
+--
+ALTER TABLE `evaluation`
+  ADD CONSTRAINT `product_id` FOREIGN KEY (`product_id`) REFERENCES `product` (`id`),
+  ADD CONSTRAINT `user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+
+--
+-- Constraints for table `product`
+--
+ALTER TABLE `product`
+  ADD CONSTRAINT `product_battery` FOREIGN KEY (`battery_id`) REFERENCES `battery` (`id`),
+  ADD CONSTRAINT `product_board` FOREIGN KEY (`board_id`) REFERENCES `board` (`id`),
+  ADD CONSTRAINT `product_brand` FOREIGN KEY (`brand_id`) REFERENCES `brand` (`id`),
+  ADD CONSTRAINT `product_cpu` FOREIGN KEY (`cpu_id`) REFERENCES `cpu` (`id`),
+  ADD CONSTRAINT `product_harddisk` FOREIGN KEY (`harddisk_id`) REFERENCES `hard_disk` (`id`),
+  ADD CONSTRAINT `product_ram` FOREIGN KEY (`ram_id`) REFERENCES `ram` (`id`),
+  ADD CONSTRAINT `product_screen` FOREIGN KEY (`screen_id`) REFERENCES `screen` (`id`),
+  ADD CONSTRAINT `product_sell_web` FOREIGN KEY (`web_id`) REFERENCES `web_communication` (`id`),
+  ADD CONSTRAINT `product_size_weight` FOREIGN KEY (`size_and_weight_id`) REFERENCES `size_weight` (`id`);
+COMMIT;
+
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2020-06-05 23:05:59
