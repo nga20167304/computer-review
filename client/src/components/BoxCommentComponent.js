@@ -22,21 +22,21 @@ class BoxCommentComponent extends Component {
           <div class="panel panel-info">
             <div class="panel-body">
               <textarea
-                placeholder="Viết gì đó coi..."
+                placeholder="Write anything..."
                 className="form-control"
                 value={this.state.comment}
                 onChange={this.handleChangeComment}
               ></textarea>
               <form class="form-inline mt-3">
                 <button
-                  class="btn btn-primary pull-right"
+                  class="btn btn-primary pull-right button comment-button"
                   type="button"
                   onClick={this.handleSubmit}
                 >
                   Comment
                 </button>
               </form>
-              <h5>Comment:</h5>
+              <p className="comments">Comment:</p>
             </div>
           </div>
         </div>

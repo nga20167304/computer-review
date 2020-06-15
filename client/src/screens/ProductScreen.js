@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-// import data from '../data';
 import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { faStar } from "@fortawesome/free-solid-svg-icons";
@@ -38,20 +37,23 @@ class ProductScreen extends Component {
       })
       .catch(err => console.log(err))
   }
+
   handleAddToDo = (item) => {
     this.state.listComments.push(item);
     this.setState({ listComments: this.state.listComments });
   };
+
   handleDeleteToDo = (index) => {
     this.state.listComments.splice(index, 1);
     this.setState({ listComments: this.state.listComments });
   };
+
   render(){
     console.log("params: ");
     console.log(this.props.match.params.id)
     console.log(this.state)
     return (<div>
-      <Button>
+      <Button className="back-button button btn-primary">
         <Link to = "/" >Back</Link>
       </Button>
 
@@ -77,8 +79,8 @@ class ProductScreen extends Component {
               </div>
             </li>
           </ul>
-          <Button variant="dark" style={{width: '50%'}}>
-            <Link to={'/compare/' + this.state.id}> So sánh...</Link>
+          <Button style={{width: '50%'}} className="button compare-button btn-info" >
+            <Link to={'/compare/' + this.state.id}> Compare</Link>
           </Button>
         </div>
       </div>

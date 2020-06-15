@@ -79,7 +79,7 @@ class createProduct extends Component {
         <div className="row">
           <div className="col-md-6 mt-5 mx-auto">
             {alerts}
-            <form noValidate onSubmit={this.onSubmit} className="create-product">
+            <form noValidate onSubmit={this.onSubmit} className="create-product form-input">
               <h1 >Create new product</h1>
               <div className="form-group">
                 <label htmlFor="name">Name</label>

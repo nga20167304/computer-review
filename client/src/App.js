@@ -21,8 +21,8 @@ function App() {
   }
     return (
       <Router>
-
         <div className="grid-container">
+        {/* <Navbar /> */}
           <header className="header">
             <div className="brand">
               <button onClick={openMenu}>
