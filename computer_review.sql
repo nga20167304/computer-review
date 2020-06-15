@@ -330,8 +330,8 @@ ALTER TABLE `board`
 --
 -- Indexes for table `brand`
 --
-ALTER TABLE `brand`
-  ADD PRIMARY KEY (`id`);
+-- ALTER TABLE `brand`
+--   ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `cpu`
@@ -363,7 +363,7 @@ ALTER TABLE `hard_disk`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
+  -- ADD PRIMARY KEY (`id`),
   ADD KEY `product_board` (`board_id`),
   ADD KEY `product_brand` (`brand_id`),
   ADD KEY `product_battery` (`battery_id`),

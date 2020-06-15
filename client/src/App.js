@@ -43,8 +43,8 @@ function App() {
               <Link to = "/" >Menu</Link>
             </div>
             <div className="header-links">
-              <a href="cart.html">Login</a>
-              <a href="signin.html">Register</a>
+              <Link to ="/login">Login</Link>
+              <Link to ="/register">Register</Link>
               <Link to="/create">Add product</Link>
             </div>
           </header>
