@@ -22,7 +22,7 @@ class BoxCommentComponent extends Component {
           <div class="panel panel-info">
             <div class="panel-body">
               <textarea
-                placeholder="コメントする..."
+                placeholder="Viết gì đó coi..."
                 className="form-control"
                 value={this.state.comment}
                 onChange={this.handleChangeComment}
@@ -33,7 +33,7 @@ class BoxCommentComponent extends Component {
                   type="button"
                   onClick={this.handleSubmit}
                 >
-                  送信
+                  Comment
                 </button>
               </form>
               <h5>コメント:</h5>

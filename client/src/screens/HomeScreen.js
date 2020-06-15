@@ -2,12 +2,10 @@ import React, {Component} from 'react';
 // import data from '../data';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import {faStar} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {SignalCellularNull} from "@material-ui/icons";
 import '../template/style.css';
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faStar} from "@fortawesome/free-solid-svg-icons";
 
-// import '../template/index.html';
 
 function searchingFor(term) {
     return function (x) {
@@ -82,11 +80,24 @@ class HomeScreen extends Component {
                     {
                         this.state.listProduct
                             .filter(searchingFor(this.state.term))
-                            .map((Computer, index) => {
-                                return (<ul className="products">
-
-                                    {listProduct}
-                                </ul>)
+                            .map((product, index) => {
+                                return (
+                                    <ul key={product.id}>
+                                        <div className="product shadow">
+                                            <Link to={'/product/' + product.id}>
+                                                <img className="product-image" src='/images/mac.jpg' alt="product"/>
+                                            </Link>
+                                            <div className="product-name">
+                                                <Link to={'/product/' + product.id}>{product.name}</Link>
+                                            </div>
+                                            <div className="product-brand">{product.brand}</div>
+                                            <div className="product-price">${product.price}</div>
+                                            <div className="product-description">{product.description}</div>
+                                            <div className="product-rating">{product.rating}
+                                                <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
+                                            </div>
+                                        </div>
+                                    </ul>)
                             })}
                 </div>
             </div>
