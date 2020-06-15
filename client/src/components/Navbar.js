@@ -30,52 +30,50 @@ class Navbar extends Component {
       </ul>
     )
 
-    const token = localStorage.usertoken
-      if(!token){
-        this.props.history.push(`/login`);
-        return;
+    let userLink = loginRegLink;
+    const token = localStorage.usertoken;
+      if(token){
+        const decoded = jwt_decode(token);
+        userLink = (
+          <ul className="navbar-nav">
+           {/* <Dropdown as={ButtonGroup}> 
+            <Button variant="success">User</Button>
+    
+            <DropdownToggle split variant="success" id="dropdown-split-basic" />
+    
+            <DropdownMenu>
+              <DropdownItem href="/profile">User</DropdownItem>
+              <DropdownItem href=""><Link to="/profile" className="nav-link">
+                User
+              </Link></DropdownItem>
+              <DropdownItem href="#/action-3">Something else</DropdownItem>
+            </DropdownMenu>
+          </Dropdown> */}
+          <Dropdown>
+            <Dropdown.Toggle variant="success" id="dropdown-basic">
+              <Image width="25" height="25" src={decoded.image} alt="no img" roundedCircle/>
+              {' '}
+              {decoded.name}
+            </Dropdown.Toggle>
+    
+            <Dropdown.Menu>
+              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+              <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
+            {/* <li className="nav-item">
+              <Link to="/profile" className="nav-link">
+                User
+              </Link>
+            </li>
+            <li className="nav-item">
+              <a href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)} className="nav-link">
+                Logout
+              </a>
+            </li> */}
+          </ul>
+        )
       }
-    const decoded = jwt_decode(token)
-
-    const userLink = (
-      <ul className="navbar-nav">
-       {/* <Dropdown as={ButtonGroup}> 
-        <Button variant="success">User</Button>
-
-        <DropdownToggle split variant="success" id="dropdown-split-basic" />
-
-        <DropdownMenu>
-          <DropdownItem href="/profile">User</DropdownItem>
-          <DropdownItem href=""><Link to="/profile" className="nav-link">
-            User
-          </Link></DropdownItem>
-          <DropdownItem href="#/action-3">Something else</DropdownItem>
-        </DropdownMenu>
-      </Dropdown> */}
-      <Dropdown>
-        <Dropdown.Toggle variant="success" id="dropdown-basic">
-          <Image width="25" height="25" src={decoded.image} alt="no img" roundedCircle/>
-          {' '}
-          {decoded.name}
-        </Dropdown.Toggle>
-
-        <Dropdown.Menu>
-          <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-          <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
-        </Dropdown.Menu>
-      </Dropdown>
-        {/* <li className="nav-item">
-          <Link to="/profile" className="nav-link">
-            User
-          </Link>
-        </li>
-        <li className="nav-item">
-          <a href="https://www.google.cm/?gws_rd=ssl" onClick={this.logOut.bind(this)} className="nav-link">
-            Logout
-          </a>
-        </li> */}
-      </ul>
-    )
 
     const openMenu = () => {
       document.querySelector(".sidebar").classList.add("open");
