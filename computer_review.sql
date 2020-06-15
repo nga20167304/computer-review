@@ -328,12 +328,6 @@ ALTER TABLE `board`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indexes for table `brand`
---
-ALTER TABLE `brand`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `cpu`
 --
 ALTER TABLE `cpu`
@@ -358,21 +352,6 @@ ALTER TABLE `graphics`
 --
 ALTER TABLE `hard_disk`
   ADD PRIMARY KEY (`id`);
-
---
--- Indexes for table `product`
---
-ALTER TABLE `product`
-  ADD PRIMARY KEY (`id`),
-  ADD KEY `product_board` (`board_id`),
-  ADD KEY `product_brand` (`brand_id`),
-  ADD KEY `product_battery` (`battery_id`),
-  ADD KEY `product_cpu` (`cpu_id`),
-  ADD KEY `product_harddisk` (`harddisk_id`),
-  ADD KEY `product_ram` (`ram_id`),
-  ADD KEY `product_screen` (`screen_id`),
-  ADD KEY `product_size_weight` (`size_and_weight_id`),
-  ADD KEY `product_sell_web` (`web_id`);
 
 --
 -- Indexes for table `ram`

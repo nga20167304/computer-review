@@ -4,16 +4,33 @@ import { Link } from 'react-router-dom'
 import axios from 'axios'
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {SignalCellularNull} from "@material-ui/icons";
+import '../template/style.css';
+// import '../template/index.html';
 
-
+function searchingFor(term) {
+    return function (x) {
+        return x.name.toLowerCase().includes(term.toLowerCase()) || x.brand.toLowerCase().includes(term.toLowerCase()) || !term;
+    };
+}
 
 class HomeScreen extends Component {
 
   constructor(props){
     super(props)
     this.state ={
-      listProduct: []
+      listProduct: [],
+        term: "",
     }
+    this.searchHandler = this.searchHandler.bind(this);
+  }
+  handleClick = ()=> {
+      console.log(this.props);
+      this.props.history.push(this.props.id)
+  }
+
+  searchHandler(event) {
+        this.setState({ term: event.target.value });
   }
 
   componentDidMount(){
@@ -29,7 +46,7 @@ class HomeScreen extends Component {
   }
 
   render(){
-    const listProduct = this.state.listProduct.map(product => 
+    const listProduct = this.state.listProduct.map(product =>
                           <li key = {product.id}>
                               <div className="product shadow">
                               <Link to={'/product/' + product.id} >
@@ -46,28 +63,33 @@ class HomeScreen extends Component {
                                         </div>
                               </div>
                           </li>)
+      return (
+          <div>
+              <div style={{display: "flex", justifyContent: "center"}}>
+                  <div className="input-group" style={{marginTop: "0.2em", width: "40vw"}}>
+                      <input
+                          name="keyword"
+                          type="text"
+                          className="form-control mb-3"
+                          placeholder="Nhập từ khóa..."
+                          onChange={this.searchHandler}
+                      />
+                  </div>
+              </div>
+              <div className="row" style={{display: "flex", justifyContent: "center"}}>
+                  {
+                      this.state.listProduct
+                          .filter(searchingFor(this.state.term))
+                          .map((Computer, index) => {
     return (<ul className="products">
-    
-       {/* data.products.map( product =>  */}
-         {/* <li> */}
-           {/* <div className="product"> */}
-           {/* <Link to={'/product/' + product.id} > */}
-             {/* <img className="product-image" src={product.image} alt="product" /> */}
-           {/* </Link> */}
-             {/* <div className="product-name"> */}
-               {/* <Link to={'/product/' + product.id} >{product.name}</Link> */}
-             {/* </div> */}
-             {/* <div className="product-brand">{product.brand}</div> */}
-             {/* <div className="product-price">${product.price}</div> */}
-             {/* <div className="product-rating">{product.rating} Stars ({product.numReviews})</div> */}
-           {/* </div> */}
-         {/* </li> */}
-         {/* ) */}
-      
+
         {listProduct}
-    </ul>)
+    </ul>)})}
+              </div>
+          </div>
+      );
   }
 }
-  
+
 
 export default HomeScreen;

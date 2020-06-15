@@ -14,7 +14,7 @@ import Sidebar from './components/Sidebar'
 import createProduct from './components/products/createProduct';
 
 function App() {
-  
+
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
@@ -23,17 +23,7 @@ function App() {
   }
     return (
       <Router>
-        {/* <div classNameName="App">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <div classNameName="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
-          </div>
-        </div> */}
-        {/* <Navbar /> */}
-            
+
         <div className="grid-container">
           <header className="header">
             <div className="brand">
@@ -43,8 +33,8 @@ function App() {
               <Link to = "/" >Menu</Link>
             </div>
             <div className="header-links">
-              <a href="cart.html">Login</a>
-              <a href="signin.html">Register</a>
+              <Link to="/login">Login</Link>
+              <Link to="/register">Register</Link>
               <Link to="/create">Add product</Link>
             </div>
           </header>
@@ -54,11 +44,11 @@ function App() {
             <button className="sidebar-close-button" onClick={closeMenu}>x</button>
             <ul>
               <li>
-                <a href="index.html">Brand</a>
+                <Link to ="/brand">Brand</Link>
               </li>
 
               <li>
-                <a href="index.html">Price</a>
+                <Link to ="/price">Brand</Link>
               </li>
 
             </ul>
@@ -67,9 +57,6 @@ function App() {
             <div className="content">
               <Route path = "/product/:id" component = { ProductScreen } />
               <Route exact path = "/" exact = {true} component = { HomeScreen }/>
-              <Route path = "/create" component = { createProduct } />
-              <Route  path="/register" component={Register} />
-              <Route  path="/login" component={Login} />
               <Route  path="/profile" component={Profile} />
             </div>
           </main>
