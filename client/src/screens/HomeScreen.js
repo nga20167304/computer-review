@@ -6,7 +6,6 @@ import '../template/style.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar, faSearch} from "@fortawesome/free-solid-svg-icons";
 
-
 class HomeScreen extends Component {
 
     constructor(props) {
@@ -77,7 +76,7 @@ class HomeScreen extends Component {
                 <div  className="products justify-content-start">
                     {
                         this.state.listProduct
-                            .filter((x) => this.searchingFor(x.name,this.state.term))
+                            .filter((x) => this.searchingFor(x.name,this.state.term)||this.searchingFor(x.brand,this.state.term))
                             .map((product) => {
                                 return (
                                         <div key={product.id} className="product shadow">

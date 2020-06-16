@@ -9,11 +9,13 @@ class CompareScreen2 extends Component {
         this.state ={
             id1: '',
             name1:'',
+            brand1:'',
             rating1:'',
             price1:'',
             description1:'',
             id2: '',
             name2:'',
+            brand2:'',
             rating2:'',
             price2:'',
             description2:'',
@@ -30,6 +32,7 @@ class CompareScreen2 extends Component {
             .then(res => {
                 this.setState({
                     name1: res.data[0].name,
+                    brand1:res.data[0].brand,
                     rating1: res.data[0].rating,
                     price1: res.data[0].price,
                     description1: res.data[0].description
@@ -40,6 +43,7 @@ class CompareScreen2 extends Component {
             .then(res => {
                 this.setState({
                     name2: res.data[0].name,
+                    brand2:res.data[0].brand,
                     rating2: res.data[0].rating,
                     price2: res.data[0].price,
                     description2: res.data[0].description
@@ -62,6 +66,11 @@ render() {
             </tr>
             </thead>
             <tbody>
+            <tr>
+                <td>Brand</td>
+                <td>{this.state.brand1}</td>
+                <td>{this.state.brand2}</td>
+            </tr>
             <tr>
                 <td>Rating</td>
                 <td>{this.state.rating1}</td>
