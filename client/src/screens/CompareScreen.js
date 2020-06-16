@@ -9,7 +9,7 @@ import {Button} from "react-bootstrap";
 
 function searchingFor(term) {
     return function (x) {
-        return x.name.toLowerCase().includes(term.toLowerCase()) || x.brand.toLowerCase().includes(term.toLowerCase()) || !term;
+        return !term||x.name.toLowerCase().includes(term.toLowerCase()) || x.brand.toLowerCase().includes(term.toLowerCase());
     };
 }
 
@@ -83,12 +83,12 @@ class CompareScreen extends Component {
         return (
             <div>
                 <div style={{display: "flex", justifyContent: "center"}}>
-                    <div className="input-group" style={{marginTop: "0.2em", width: "40vw", height: "5rem"}}>
+                    <div className="input-group">
                         <input
                             name="keyword"
                             type="text"
-                            className="form-control mb-2"
-                            placeholder="Nhập từ khóa..."
+                            className="form-control mb-2 searchbar"
+                            placeholder="Product's name ..."
                             onChange={this.searchHandler}
                         />
                     </div>
@@ -114,7 +114,7 @@ class CompareScreen extends Component {
                                         <div className="product-rating">{product.rating}
                                             <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
                                         </div>
-                                        <Button>
+                                        <Button style={{marginBottom : '0.2rem' }}>
                                             <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
                                         </Button>
                                     </div>)
