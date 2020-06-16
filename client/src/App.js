@@ -10,6 +10,7 @@ import Profile from './components/Profile'
 import createProduct from './components/products/createProduct';
 import CompareScreen from './screens/CompareScreen'
 import CompareScreen2 from './screens/CompareScreen2'
+import Navbar from './components/Navbar'
 
 function App() {
 
@@ -21,8 +22,8 @@ function App() {
   }
     return (
       <Router>
-
         <div className="grid-container">
+{/* <<<<<<< HEAD
           <header className="header">
             <div className="brand">
               <button onClick={openMenu}>
@@ -36,6 +37,8 @@ function App() {
               <Link to="/create">Add product</Link>
             </div>
           </header>
+======= */}
+        <Navbar />
 
           <aside className="sidebar">
             <h3>Home</h3>

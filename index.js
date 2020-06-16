@@ -17,11 +17,9 @@ app.use(
 app.use(express.static('public'))
 
 var Users = require('./routes/Users')
-// var Product = require('./routes/Product')
 routes(app);
 
 app.use('/users', Users)
-// app.use('/products', Product)
 
 app.get('/', (req, res) => {
    res.send('hello from server!')
