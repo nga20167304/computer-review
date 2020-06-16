@@ -30,7 +30,7 @@ app.get('/', (req, res) => {
 app.get('/api/helloworld', (req, res) => {
   res.json({sayHi: 'hello from server, nice to meet you!'})
 })
- 
+
 app.listen(5000, () => {
    console.log('App listening on port 5000')
 })
@@ -42,6 +42,7 @@ var con = mysql.createConnection({
    host: "localhost",
    user: "root",
    password: "12345678",
+   // password: "",
    database: "computer_review"
  });
 

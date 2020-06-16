@@ -4,17 +4,15 @@ import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import './App.css'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
-
-import Navbar from './components/Navbar'
-import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
-import Sidebar from './components/Sidebar'
 import createProduct from './components/products/createProduct';
+import CompareScreen from './screens/CompareScreen'
+import CompareScreen2 from './screens/CompareScreen2'
 
 function App() {
-  
+
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
@@ -23,17 +21,7 @@ function App() {
   }
     return (
       <Router>
-        {/* <div classNameName="App">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <div classNameName="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
-          </div>
-        </div> */}
-        {/* <Navbar /> */}
-            
+
         <div className="grid-container">
           <header className="header">
             <div className="brand">
@@ -54,17 +42,19 @@ function App() {
             <button className="sidebar-close-button" onClick={closeMenu}>x</button>
             <ul>
               <li>
-                <a href="index.html">Brand</a>
+                <Link to ="/brand">Brand</Link>
               </li>
 
               <li>
-                <a href="index.html">Price</a>
+                <Link to ="/price">Brand</Link>
               </li>
 
             </ul>
           </aside>
           <main className="main">
             <div className="content">
+              <Route path="/compares/:id1?/:id2" component={ CompareScreen2 }/>
+              <Route path="/compare/:id" component={ CompareScreen }/>
               <Route path = "/product/:id" component = { ProductScreen } />
               <Route exact path = "/" exact = {true} component = { HomeScreen }/>
               <Route path = "/create" component = { createProduct } />
