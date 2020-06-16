@@ -43,7 +43,7 @@ class Login extends Component {
         this.setState({errors: errs});
         return;
       }else{
-        this.props.history.push(`/profile`)
+        this.props.history.push(`/`)
       }
     })
   }

@@ -17,7 +17,7 @@ const sequelize = new Sequelize('computer_review', 'root', '', {
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'phuonganh123',
+  password : '',
   database : 'computer_review'
 });
 

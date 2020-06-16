@@ -1,34 +1,28 @@
-var Product = require('../models/ProductModel.js');
+var Product = require('../models/Product.js');
 
 exports.list_all_products = function(req, res) {
-    Product.getAllProduct(function(err, product) {
-
-        console.log('controller')
-        if (err)
-            res.send(err);
-        console.log('res', product);
-        res.send(product);
-    });
+    Product.findAll({include: [{all: true}]}).then(
+        (products) => {
+            res.send(products);
+        }
+    )
 };
 
 exports.create_a_product = function(req, res) {
-    var new_product = new Product(req.body);
     console.log("req.body")
-    console.log(req)
-
-    Product.createProduct(new_product, function(err, product) {
-        if (err)
-            res.send(err);
-        else{
-            res.send("Success!!");
+    console.log(req.body)
+    Product.create(req.body,{include: [{all: true}]}).then(
+        (products) => {
+            console.log('backend', products);
+            res.send(products);
         }
-    });
+    )
 };
 
 exports.read_a_product = function(req, res) {
-    Product.getProductById(req.params.productId, function(err, product) {
-        if (err)
-            res.send(err);
-        res.send(product);
-    });
+    Product.findByPk(req.params.productId, {include: [{all: true}]}).then(
+        (product) => {
+            res.send(product);
+        }
+    );
 };
