@@ -1,7 +1,6 @@
 var mysql = require('mysql');
 const Sequelize = require('sequelize')
 const db = {}
-
 const sequelize = new Sequelize('computer_review', 'root', '', {
 
   host: 'localhost',

@@ -2,9 +2,10 @@ import React, {Component} from 'react';
 // import data from '../data';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-import '../template/style.css';
+// import '../template/style.css';
+import {Image} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faStar} from "@fortawesome/free-solid-svg-icons";
 
 class HomeScreen extends Component {
 
@@ -18,12 +19,7 @@ class HomeScreen extends Component {
     }
 
     searchingFor = (x, term) => {
-            return term!==null & (x.toLowerCase().includes(term.toLowerCase()));
-    }
-
-    handleClick = () => {
-        console.log(this.props);
-        this.props.history.push(this.props.id)
+        return term!==null & (x?.toLowerCase().includes(term.toLowerCase()));
     }
 
     searchHandler(event) {
@@ -43,32 +39,16 @@ class HomeScreen extends Component {
     }
 
     render() {
-        // const listProduct = this.state.listProduct.map(product =>
-        //     <li key={product.id}>
-        //         <div className="product shadow">
-        //             <Link to={'/product/' + product.id}>
-        //                 <img className="product-image" src='/images/mac.jpg' alt="product"/>
-        //             </Link>
-        //             <div className="product-name">
-        //                 <Link to={'/product/' + product.id}>{product.name}</Link>
-        //             </div>
-        //             <div className="product-brand">{product.brand}</div>
-        //             <div className="product-price">${product.price}</div>
-        //             <div className="product-description">{product.description}</div>
-        //             <div className="product-rating">{product.rating}
-        //                 <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
-        //             </div>
-        //         </div>
-        //     </li>)
+        console.log(this.state);
         return (
             <div>
-                <div style={{display: "flex", justifyContent: "center"}}>
+                <div style={{display: "flex", justifyContent: "center", width: '40rem', marginTop : '0.5rem', marginLeft: '45rem'}}>
                     <div className="input-group">
                         <input
                             name="keyword"
                             type="text"
                             className="form-control mb-2 searchbar"
-                            placeholder="Product's name ..."
+                            placeholder="Product's name or brand..."
                             onChange={this.searchHandler}
                         />
                     </div>
@@ -76,23 +56,25 @@ class HomeScreen extends Component {
                 <div  className="products justify-content-start">
                     {
                         this.state.listProduct
-                            .filter((x) => this.searchingFor(x.name,this.state.term)||this.searchingFor(x.brand,this.state.term))
+                            .filter((x) => this.searchingFor(x.name,this.state.term)||this.searchingFor(x.brand.name,this.state.term))
                             .map((product) => {
                                 return (
-                                        <div key={product.id} className="product shadow">
+                                    <div key={product.id} className="product shadow">
+                                        <div style={{textAlign: 'center'}}>
                                             <Link to={'/product/' + product.id}>
-                                                <img className="product-image" src='/images/mac.jpg' alt="product"/>
+                                                <Image style={{width:'320px',height:'200px'}} className="product-image" src={product.image} alt="product"/>
                                             </Link>
-                                            <div style={{paddingTop : "2rem"}} className="product-name">
-                                                <Link to={'/product/' + product.id}>{product.name}</Link>
-                                            </div>
-                                            <div className="product-brand">{product.brand}</div>
-                                            <div className="product-price">${product.price}</div>
-                                            <div className="product-description">{product.description}</div>
-                                            <div className="product-rating">{product.rating}
-                                                <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
-                                            </div>
-                                        </div>)
+                                        </div>
+                                        <div style={{paddingTop : "2rem"}} className="product-name">
+                                            <Link to={'/product/' + product.id}>{product.name}</Link>
+                                        </div>
+                                        <div className="product-brand">{product.brand.name}</div>
+                                        <div className="product-price">${product.price}</div>
+                                        <div className="product-description">{product.description}</div>
+                                        <div className="product-rating">{product.rating}
+                                            <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
+                                        </div>
+                                    </div>)
                             })}
                 </div>
             </div>
@@ -102,3 +84,5 @@ class HomeScreen extends Component {
 
 
 export default HomeScreen;
+
+
