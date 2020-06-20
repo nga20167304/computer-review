@@ -1,11 +1,10 @@
 import React, {Component} from 'react';
-// import data from '../data';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-// import '../template/style.css';
 import {Image} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
+import {Button} from "react-bootstrap";
 
 class HomeScreen extends Component {
 
@@ -22,7 +21,6 @@ class HomeScreen extends Component {
         return term!==null & (x?.toLowerCase().includes(term.toLowerCase()));
     }
 
-
     searchHandler(event) {
         this.setState({term: event.target.value});
     }
@@ -38,7 +36,6 @@ class HomeScreen extends Component {
             })
             .catch(err => console.log(err))
     }
-
 
     render() {
         console.log(this.state);
@@ -75,6 +72,11 @@ class HomeScreen extends Component {
                                         <div className="product-description">{product.description}</div>
                                         <div className="product-rating">{product.rating}
                                             <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
+                                        </div>
+                                        <div style={{display: "flex", justifyContent: "flex-end", fontSize: "2em", alignItems: "center"}}>
+                                            <Button style={{marginTop : '-3.5rem' , backgroundColor : "#000000" }}>
+                                                <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
+                                            </Button>
                                         </div>
                                     </div>)
                             })}

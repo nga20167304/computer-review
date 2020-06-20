@@ -1,58 +1,32 @@
-import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link} from 'react-router-dom'
-// import axios from 'axios';
+import React from 'react';
+import { BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css'
 import HomeScreen from './screens/HomeScreen'
 import ProductScreen from './screens/ProductScreen'
+import CompareScreen2 from './screens/CompareScreen2'
+import CompareScreen from './screens/CompareScreen'
+
 
 import Navbar from './components/Navbar'
-import Landing from './components/Landing'
 import Login from './components/Login'
 import Register from './components/Register'
 import Profile from './components/Profile'
-import Sidebar from './components/Sidebar'
 import createProduct from './components/products/createProduct';
 
 function App() {
-  
+
   const closeMenu = () => {
     document.querySelector(".sidebar").classList.remove("open")
   }
-  const openMenu = () => {
-    document.querySelector(".sidebar").classList.add("open")
-  }
-    return (
+  return (
       <Router>
-        {/* <div classNameName="App">
-          <Navbar />
-          <Route exact path="/" component={Landing} />
-          <div classNameName="container">
-            <Route exact path="/register" component={Register} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/profile" component={Profile} />
-          </div>
-        </div> */}
-        
-            
+
         <div className="grid-container">
         <Navbar />
-          {/* <header className="header">
-            <div className="brand">
-              <button onClick={openMenu}>
-                &#9776;
-              </button>
-              <Link to = "/" >Menu</Link>
-            </div>
-            <div className="header-links">
-              <a href="cart.html">Login</a>
-              <a href="signin.html">Register</a>
-              <Link to="/create">Add product</Link>
-            </div>
-          </header> */}
 
-          <aside className="sidebar">
+          <aside className='sidebar'>
             <h3>Home</h3>
-            <button className="sidebar-close-button" onClick={closeMenu}>x</button>
+            <button className='sidebar-close-button' onClick={closeMenu}>X</button>
             <ul>
               <li>
                 <a href="index.html">Brand</a>
@@ -66,12 +40,14 @@ function App() {
           </aside>
           <main className="main">
             <div className="content">
+              <Route path="/compares/:id1?/:id2" component={ CompareScreen2 }/>
+              <Route path="/compare/:id" component={ CompareScreen }/>
               <Route path = "/product/:id" component = { ProductScreen } />
-              <Route exact path = "/" exact = {true} component = { HomeScreen }/>
+              <Route path = "/" exact = {true} component = { HomeScreen }/>
               <Route path = "/create" component = { createProduct } />
-              <Route  path="/register" component={Register} />
-              <Route  path="/login" component={Login} />
-              <Route  path="/profile" component={Profile} />
+              <Route path="/register" component={Register} />
+              <Route path="/login" component={Login} />
+              <Route path="/profile" component={Profile} />
             </div>
           </main>
           <footer className="footer">
