@@ -3,6 +3,7 @@ const Sequelize = require('sequelize')
 const db = {}
 
 // const sequelize = new Sequelize('computer_review', 'root', '12345678', {
+
 const sequelize = new Sequelize('computer_review', 'root', '', {
 
 

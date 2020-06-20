@@ -2,6 +2,7 @@ const express = require('express')
 const users = express.Router()
 const cors = require('cors')
 const jwt = require('jsonwebtoken')
+// const bcrypt = require('bcrypt')
 var multer  = require('multer')
 var upload = multer({ dest: './public/uploads/' })
 var md5 = require('md5')
@@ -40,7 +41,7 @@ users.post('/register',upload.single('image'), (req, res) => {
           name: req.body.name,
           email: req.body.email,
           password: md5(req.body.password),
-          image: req.body.image
+          image: req.body.image,
         }
 
         User.create(userData)

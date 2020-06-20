@@ -36,7 +36,7 @@ class Profile extends Component {
     this.handleClickChangePassword = this.handleClickChangePassword.bind(this);
     this.handleCancelChangePassword = this.handleCancelChangePassword.bind(this);
     this.handleSavePassword = this.handleSavePassword.bind(this);
-    
+
   }
 
   componentDidMount() {
@@ -136,7 +136,7 @@ class Profile extends Component {
       confirmPassword: '',
       errors: []});
   }
-  
+
   handleSavePassword(e) {
     e.preventDefault();
     const token = localStorage.usertoken
@@ -180,7 +180,6 @@ class Profile extends Component {
   }
 
   render() {
-    
     let alerts = this.state.errors.map((err, index) => <div key={index} className="alert alert-danger" role="alert"> {err} </div>);
     let success = this.state.success.map((err, index) => <div key={index} className="alert alert-success" role="alert"> {err} </div>);
 
@@ -188,7 +187,7 @@ class Profile extends Component {
       <div className="container">
         <div className="jumbotron mt-5">
           <div className="col-sm-8 mx-auto">
-            <h1 className="text-center profile">PROFILE</h1>
+            <h1 className="text-center">PROFILE</h1>
           </div>
           <div style={{display:"flex", justifyContent:"center"}}>
               <Button className="btn btn-default btn-circle"
@@ -200,10 +199,10 @@ class Profile extends Component {
                       id="hiddenFileInput"
                       name="image"
                       onChange={this.handleChangeImage}
-                      style={{display:'none'}} 
+                      style={{display:'none'}}
                 />
               </Button>
-            
+
             <table className="table col-md-6 mx-5">
               <tbody>
                 {alerts.length ? <tr><td colSpan="2" style={{border: "none"}}>{alerts}</td></tr> : ''}
@@ -223,7 +222,7 @@ class Profile extends Component {
                         <Button key={'saveBtn'} variant="outline-success" size="sm" onClick={this.handleSaveName}>Save</Button>,
                         ' ',
                         <Button key={'cancelBtn'} variant="outline-dark" size="sm" onClick={this.handleCancelChangeName}>Cancel</Button>
-                      ] : 
+                      ] :
                       <Button key={'changeBtn'} variant="link" size="sm" onClick={this.handleClickChangeName}>Change</Button>
                     }
                   </td>
@@ -247,4 +246,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile
+export default Profile;

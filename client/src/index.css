@@ -41,6 +41,10 @@ button{
   font-weight: bold;
   text-decoration: none;
 }
+.brand a:hover{
+  text-decoration: none;
+  color: #ffffff;
+}
 .header-links a{
   color:#ffffff;
   text-decoration: none;
@@ -69,8 +73,9 @@ a:hover{
 }
 /* Home Screen */
 .products {
-  padding: 5%;
+  padding: 50px;
   display: flex;
+  justify-content: flex-start;
   align-items: center;
   flex-wrap: wrap;
 }
@@ -79,6 +84,8 @@ a:hover{
   padding: 0;
   flex: 0 1 34rem;
   margin: 1rem;
+  /* height: 50rem; */
+  /* border-bottom: .1rem #c0c0c0 solid; */
 }
 .product{
   margin: 20px 10px;
@@ -86,8 +93,8 @@ a:hover{
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  height: 400px !important;
-  width: 31%;
+  height: 400px;
+
   border: 1px solid #e6e6e6;
 }
 .shadow {

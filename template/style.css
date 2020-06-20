@@ -9,7 +9,7 @@ html{
   }
   .grid-container{
     display: grid;
-    grid-template-areas:
+    grid-template-areas: 
     "header"
     "main"
     "footer";
@@ -36,7 +36,7 @@ html{
     color:#ffffff;
     text-decoration: none;
     padding: 1rem;
-
+  
   }
   .header-links a:hover{
     color:#ff8000;
@@ -66,10 +66,9 @@ html{
     flex-wrap: wrap;
   }
   .products li {
-    list-style-type: lower-alpha;
+    list-style-type: none;
     padding: 0;
     flex: 0 1 34rem;
-    width: 1rem;
     margin: 1rem;
     height: 50rem;
     border-bottom: .1rem #c0c0c0 solid;
@@ -100,7 +99,7 @@ html{
     margin-bottom: 1rem;
   }
   /* Sidebar */
-
+  
   .brand button {
     font-size: 3rem;
     padding: .5rem;
@@ -109,36 +108,27 @@ html{
     color:#ffffff;
     cursor: pointer;
   }
-  .sidenav {
-  height: 100%;
-  width: 0;
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
-  background-color: #111;
-  overflow-x: hidden;
-  transition: 0.5s;
-  padding-top: 60px;
+  .sidebar{
+    position: fixed;
+    transform: translateX(-30rem);
+    width: 30rem;
+    background-color: #f0f0f0;
+    height: 100%;
   }
-
-  .sidenav a {
-  padding: 8px 8px 8px 32px;
-  text-decoration: none;
-  font-size: 25px;
-  color: #818181;
-  display: block;
-  transition: 0.3s;
+  .sidebar.open{
+    transform: translateX(0);
   }
-
-  .sidenav a:hover {
-  color: #f1f1f1;
-  }
-
-  .sidenav .closebtn {
-  position: relative;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
+  
+  .sidebar-close-button{
+    border-radius: 50%;
+    border: .1rem #000000 solid;
+    width: 3rem;
+    height: 3rem;
+    padding: .5rem;
+    font-size: 2rem;
+    padding-top: 0;
+    cursor: pointer;
+    position: absolute;
+    right: .5rem;
+    top: 1.5rem
   }

@@ -190,7 +190,6 @@ CREATE TABLE `product` (
   `name` varchar(45) COLLATE utf8mb4_general_ci NOT NULL,
   `price` varchar(45) NOT NULL,
   `rating` int(11) NULL DEFAULT 0,
---  `imgUrl` varchar(100) NULL DEFAULT NULL,
   `description` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `image` varchar(45) COLLATE utf8mb4_general_ci NULL DEFAULT NULL,
   `web_id` int(11) NULL DEFAULT NULL,
@@ -329,15 +328,18 @@ ALTER TABLE `board`
   ADD PRIMARY KEY (`id`);
 
 --
-<<<<<<< HEAD
 -- Indexes for table `brand`
 --
 -- ALTER TABLE `brand`
 --   ADD PRIMARY KEY (`id`);
 
 --
-=======
->>>>>>> ef215a3d850aa106c668ae93617bef86dcfa5c0d
+-- Indexes for table `brand`
+--
+ALTER TABLE `brand`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `cpu`
 --
 ALTER TABLE `cpu`
@@ -367,7 +369,7 @@ ALTER TABLE `hard_disk`
 -- Indexes for table `product`
 --
 ALTER TABLE `product`
-  -- ADD PRIMARY KEY (`id`),
+  ADD PRIMARY KEY (`id`),
   ADD KEY `product_board` (`board_id`),
   ADD KEY `product_brand` (`brand_id`),
   ADD KEY `product_battery` (`battery_id`),
