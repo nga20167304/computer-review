@@ -21,10 +21,10 @@ users.post('/register',upload.single('image'), (req, res) => {
   if(req.file){
 
     //link image for window
-    // req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+    req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
 
     //link image for mac
-    req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
+    // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }else{
     req.body.image = '/uploads/0e0a2b029b5b3116500043d49c2d2659';
   }
@@ -155,5 +155,15 @@ users.get('/profile', (req, res) => {
       res.send('error: ' + err)
     })
 })
+
+router.delete('/delete/:id', (req, res) => {
+  const { id } = req.params;
+  db.collection('id').findOneAndDelete({id: id}, 
+  (err, result) => {
+  if (err) return res.send(500, err)
+  console.log('got deleted');
+  res.redirect('/');
+  });
+});
 
 module.exports = users

@@ -63,23 +63,23 @@ class CompareScreen extends Component {
     render() {
         console.log(this.state.id)
         console.log(this.state)
-        const listProduct = this.state.listProduct.map(product =>
-            <li key={product.id}>
-                <div className="product shadow">
-                    <Link to={'/product/' + product.id}>
-                        <img className="product-image" src='/images/mac.jpg' alt="product"/>
-                    </Link>
-                    <div className="product-name">
-                        <Link to={'/product/' + product.id}>{product.name}</Link>
-                    </div>
-                    <div className="product-brand">{product.brand}</div>
-                    <div className="product-price">${product.price}</div>
-                    <div className="product-description">{product.description}</div>
-                    <div className="product-rating">{product.rating}
-                        <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
-                    </div>
-                </div>
-            </li>)
+        // const listProduct = this.state.listProduct.map(product =>
+        //     <li key={product.id}>
+        //         <div className="product shadow">
+        //             <Link to={'/product/' + product.id}>
+        //                 <img className="product-image" src='/images/mac.jpg' alt="product"/>
+        //             </Link>
+        //             <div className="product-name">
+        //                 <Link to={'/product/' + product.id}>{product.name}</Link>
+        //             </div>
+        //             <div className="product-brand">{product.brand}</div>
+        //             <div className="product-price">${product.price}</div>
+        //             <div className="product-description">{product.description}</div>
+        //             <div className="product-rating">{product.rating}
+        //                 <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
+        //             </div>
+        //         </div>
+        //     </li>)
         return (
             <div>
                 <div style={{display: "flex", justifyContent: "center"}}>
@@ -88,7 +88,7 @@ class CompareScreen extends Component {
                             name="keyword"
                             type="text"
                             className="form-control mb-2 searchbar"
-                            placeholder="Product's name ..."
+                            placeholder="Search ..."
                             onChange={this.searchHandler}
                         />
                     </div>
@@ -114,9 +114,12 @@ class CompareScreen extends Component {
                                         <div className="product-rating">{product.rating}
                                             <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
                                         </div>
-                                        <Button style={{marginBottom : '0.2rem' }}>
-                                            <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
+                                        <div style={{display: "flex", justifyContent: "flex-end", fontSize: "1em", alignItems: "center"}}>
+                                        <Button style={{marginTop : '-3.5rem', width: '2rem'}} >
+                                            <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>Compare</Link>
                                         </Button>
+                                        </div>
+                                        
                                     </div>)
                             })}
                 </div>

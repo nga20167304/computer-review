@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import BoxCommentComponent from "../components/BoxCommentComponent";
 import ListCommentComponent from "../components/ListCommentComponent";
 import { Button} from "react-bootstrap";
-import browserHistory from '../helpers/history';
+// import browserHistory from '../helpers/history';
 
 class ProductScreen extends Component {
   constructor(props){

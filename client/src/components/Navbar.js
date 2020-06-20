@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 // import { Dropdown, ButtonGroup, Button, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import { Dropdown, Button, Image} from 'react-bootstrap'
+import { Dropdown, Image} from 'react-bootstrap'
 import jwt_decode from 'jwt-decode';
 
 class Navbar extends Component {

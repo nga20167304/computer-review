@@ -4,7 +4,7 @@ import {Link} from 'react-router-dom'
 import axios from 'axios'
 import '../template/style.css';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faStar, faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faStar} from "@fortawesome/free-solid-svg-icons";
 
 class HomeScreen extends Component {
 

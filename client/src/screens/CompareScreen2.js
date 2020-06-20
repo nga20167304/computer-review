@@ -19,6 +19,8 @@ class CompareScreen2 extends Component {
             rating2:'',
             price2:'',
             description2:'',
+            image1: '',
+            image2: '',
 
         };
         this.id1 = props.match.params.id1;
@@ -35,6 +37,7 @@ class CompareScreen2 extends Component {
                     brand1:res.data[0].brand,
                     rating1: res.data[0].rating,
                     price1: res.data[0].price,
+                    image1: res.data[0].image,
                     description1: res.data[0].description
                 })
             })
@@ -46,6 +49,7 @@ class CompareScreen2 extends Component {
                     brand2:res.data[0].brand,
                     rating2: res.data[0].rating,
                     price2: res.data[0].price,
+                    image2: res.data[0].image,
                     description2: res.data[0].description
                 })
             })
@@ -60,7 +64,7 @@ render() {
         <Table striped bordered hover style={{marginTop : '5rem'}}>
             <thead>
             <tr>
-                <th>So sánh</th>
+                <th>Compare</th>
                 <th>{this.state.name1}</th>
                 <th>{this.state.name2}</th>
             </tr>
@@ -86,6 +90,11 @@ render() {
                 <td> {this.state.price1}</td>
                 <td> {this.state.price2}</td>
             </tr>
+            {/* <tr>
+                <td>Image</td>
+                <td> {src='../public.images.mac.jpg'}</td>
+                <td> {this.state.image2}</td>
+            </tr> */}
             </tbody>
         </Table>
     )
