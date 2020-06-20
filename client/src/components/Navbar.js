@@ -1,18 +1,15 @@
-import React, { Component } from 'react'
-import { Link, withRouter } from 'react-router-dom'
+import React, {Component} from 'react';
+import {Link, withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
-// import { Dropdown, ButtonGroup, Button, DropdownToggle, DropdownMenu, DropdownItem} from 'reactstrap';
-import { Dropdown, Button, Image} from 'react-bootstrap'
+import {Dropdown, Image} from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
 
 class Navbar extends Component {
     logOut(e) {
         e.preventDefault()
         localStorage.removeItem('usertoken')
-        this.props.history.push('/')
+        this.props.history.push(`/`)
     }
-
-
 
     render() {
         const loginRegLink = (
@@ -27,35 +24,57 @@ class Navbar extends Component {
                         Register
                     </Link>
                 </li>
-                <li className="nav-item">
-                    <Link to="/create" className="nav-link">Add product</Link>
-                </li>
             </ul>
         )
 
         let userLink = loginRegLink;
         const token = localStorage.usertoken;
-        if(token){
+        if (token) {
             const decoded = jwt_decode(token);
-            userLink = (
-                <ul className="navbar-nav">
+            console.log(token)
+            if(decoded.id===0) {
+                userLink = (
+                    <ul className="navbar-nav">
 
-                    <Dropdown>
-                        <Dropdown.Toggle variant="success" id="dropdown-basic">
-                            <Image width="25" height="25" src={decoded.image} alt="no img" roundedCircle/>
-                            {' '}
-                            {decoded.name}
-                        </Dropdown.Toggle>
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                <Image width="25" height="25" src={decoded.image} alt="no img" roundedCircle/>
+                                {' '}
+                                {decoded.name}
+                            </Dropdown.Toggle>
 
-                        <Dropdown.Menu style = {{color : 'dark'}}>
-                            <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                            <Dropdown.Item href="/" onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
-                            <Dropdown.Item href="/create">AddProduct</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/create">Add Product</Dropdown.Item>
+                                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                                <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl"
+                                               onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
 
-                </ul>
-            )
+                    </ul>
+                )
+            }
+            else{
+                userLink = (
+                    <ul className="navbar-nav">
+
+                        <Dropdown>
+                            <Dropdown.Toggle variant="success" id="dropdown-basic">
+                                <Image width="25" height="25" src={decoded.image} alt="no img" roundedCircle/>
+                                {' '}
+                                {decoded.name}
+                            </Dropdown.Toggle>
+
+                            <Dropdown.Menu>
+                                <Dropdown.Item href="/profile">Profile</Dropdown.Item>
+                                <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl"
+                                               onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
+                            </Dropdown.Menu>
+                        </Dropdown>
+
+                    </ul>
+                )
+            }
         }
 
         const openMenu = () => {
@@ -73,13 +92,13 @@ class Navbar extends Component {
                     aria-expanded="false"
                     aria-label="Toggle navigation"
                 >
-                    <span className="navbar-toggler-icon" />
+                    <span className="navbar-toggler-icon"/>
                 </button>
                 <div className="brand">
                     <button onClick={openMenu}>
                         &#9776;
                     </button>
-                    <Link to = "/" >Home</Link>
+                    <Link to="/">Home</Link>
                 </div>
 
                 <div

@@ -1,49 +1,31 @@
-import React, { Component } from 'react';
-// import data from '../data';
+import React, {Component} from 'react';
+import {Link} from 'react-router-dom'
 import axios from 'axios'
-import { faStar } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {Link} from "react-router-dom";
-import '../template/style.css';
+import {Image} from "react-bootstrap";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faStar} from "@fortawesome/free-solid-svg-icons";
 import {Button} from "react-bootstrap";
 
-function searchingFor(term) {
-    return function (x) {
-        return !term||x.name.toLowerCase().includes(term.toLowerCase()) || x.brand.toLowerCase().includes(term.toLowerCase());
-    };
-}
+class HomeScreen extends Component {
 
-class CompareScreen extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            id: '',
-            name: '',
-            rating: '',
-            price: '',
-            description: '',
             listProduct: [],
             term: "",
-        };
-        this.id = props.match.params.id;
+        }
         this.searchHandler = this.searchHandler.bind(this);
     }
 
+    searchingFor = (x, term) => {
+        return term!==null & (x?.toLowerCase().includes(term.toLowerCase()));
+    }
+
+    searchHandler(event) {
+        this.setState({term: event.target.value});
+    }
+
     componentDidMount() {
-        const productId = this.props.match.params.id;
-        axios.get(`http://localhost:5000/compare/${productId}`, null)
-            .then(res => {
-                this.setState({
-                    name: res.data[0].name,
-                    rating: res.data[0].rating,
-                    price: res.data[0].price,
-                    description: res.data[0].description
-                })
-                console.log(this.state)
-            })
-
-            .catch(err => console.log(err))
-
         axios.get(`http://localhost:5000/products`, null)
             .then(res => {
                 console.log("res = " + res);
@@ -53,70 +35,49 @@ class CompareScreen extends Component {
                 })
             })
             .catch(err => console.log(err))
-
-    }
-
-    searchHandler(event) {
-        this.setState({term: event.target.value});
     }
 
     render() {
-        console.log(this.state.id)
-        console.log(this.state)
-        const listProduct = this.state.listProduct.map(product =>
-            <li key={product.id}>
-                <div className="product shadow">
-                    <Link to={'/product/' + product.id}>
-                        <img className="product-image" src='/images/mac.jpg' alt="product"/>
-                    </Link>
-                    <div className="product-name">
-                        <Link to={'/product/' + product.id}>{product.name}</Link>
-                    </div>
-                    <div className="product-brand">{product.brand}</div>
-                    <div className="product-price">${product.price}</div>
-                    <div className="product-description">{product.description}</div>
-                    <div className="product-rating">{product.rating}
-                        <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
-                    </div>
-                </div>
-            </li>)
+        console.log(this.state);
         return (
             <div>
-                <div style={{display: "flex", justifyContent: "center"}}>
+                <div style={{display: "flex", justifyContent: "center", width: '40rem', marginTop : '0.5rem', marginLeft: '45rem'}}>
                     <div className="input-group">
                         <input
                             name="keyword"
                             type="text"
                             className="form-control mb-2 searchbar"
-                            placeholder="Product's name ..."
+                            placeholder="Product's name or brand..."
                             onChange={this.searchHandler}
                         />
                     </div>
                 </div>
-                <div style={{
-                    flexWrap: 'wrap',
-                    display: "flex",
-                    justifyContent: 'center'
-                }}>
+                <div  className="products justify-content-start">
                     {
                         this.state.listProduct
-                            .filter(searchingFor(this.state.term))
-                            .map((product, index) => {
+                            .filter((x) => this.searchingFor(x.name,this.state.term)||this.searchingFor(x.brand.name,this.state.term))
+                            .map((product) => {
                                 return (
                                     <div key={product.id} className="product shadow">
-                                        <img className="product-image" src='/images/mac.jpg' alt="product"/>
-                                        <div style={{paddingTop: "2rem"}} className="product-name">
-                                            {product.name}
+                                        <div style={{textAlign: 'center'}}>
+                                            <Link to={'/product/' + product.id}>
+                                                <Image style={{width:'320px',height:'200px'}} className="product-image" src={product.image} alt="product"/>
+                                            </Link>
                                         </div>
-                                        <div className="product-brand">{product.brand}</div>
+                                        <div style={{paddingTop : "2rem"}} className="product-name">
+                                            <Link to={'/product/' + product.id}>{product.name}</Link>
+                                        </div>
+                                        <div className="product-brand">{product.brand.name}</div>
                                         <div className="product-price">${product.price}</div>
                                         <div className="product-description">{product.description}</div>
                                         <div className="product-rating">{product.rating}
                                             <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
                                         </div>
-                                        <Button style={{marginBottom : '0.2rem' }}>
-                                            <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
-                                        </Button>
+                                        <div style={{display: "flex", justifyContent: "flex-end", fontSize: "2em", alignItems: "center"}}>
+                                            <Button style={{marginTop : '-3.5rem' , backgroundColor : "#000000" }}>
+                                                <Link to={'/compares/' + this.props.match.params.id + '/' + product.id }>So sánh</Link>
+                                            </Button>
+                                        </div>
                                     </div>)
                             })}
                 </div>
@@ -126,4 +87,6 @@ class CompareScreen extends Component {
 }
 
 
-export default CompareScreen;
+export default HomeScreen;
+
+

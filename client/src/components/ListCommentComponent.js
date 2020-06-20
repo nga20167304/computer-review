@@ -8,7 +8,7 @@ class ListCommentComponent extends Component {
   render() {
     var item = this.props;
     return (
-      <div className="ToDoListItem col-md-8" style={{marginLeft : '10rem'}} onClick={this.handleDeleteItem}>
+      <div className="ToDoListItem col-md-8" onClick={this.handleDeleteItem}>
         <div className="ToDoListItem-comment col-md-8">{item.comment}</div>
       </div>
     );
