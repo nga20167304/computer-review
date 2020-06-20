@@ -330,6 +330,12 @@ ALTER TABLE `board`
 --
 -- Indexes for table `brand`
 --
+-- ALTER TABLE `brand`
+--   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `brand`
+--
 ALTER TABLE `brand`
   ADD PRIMARY KEY (`id`);
 

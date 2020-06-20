@@ -6,7 +6,9 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Button, Image} from "react-bootstrap";
 import ListCommentComponent from "../components/ListCommentComponent";
+// import { Button} from "react-bootstrap";
 import BoxCommentComponent from "../components/BoxCommentComponent";
+
 
 class ProductScreen extends Component {
   constructor(props){

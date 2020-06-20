@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css'
@@ -13,6 +14,14 @@ import Register from './components/Register'
 import Profile from './components/Profile'
 import createProduct from './components/products/createProduct';
 
+import { Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import { UserList, UserEdit } from './users'
+import { PostList, PostCreate, PostEdit } from './posts';
+// import myDataProvider from './myDataProvider'
+
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+
 function App() {
 
   const closeMenu = () => {
@@ -22,6 +31,21 @@ function App() {
       <Router>
 
         <div className="grid-container">
+{/* <<<<<<< HEAD
+          <header className="header">
+            <div className="brand">
+              <button onClick={openMenu}>
+                &#9776;
+              </button>
+              <Link to = "/" >Menu</Link>
+            </div>
+            <div className="header-links">
+              <Link to ="/login">Login</Link>
+              <Link to ="/register">Register</Link>
+              <Link to="/create">Add Post</Link>
+            </div>
+          </header>
+======= */}
         <Navbar />
 
           <aside className='sidebar'>
@@ -50,6 +74,12 @@ function App() {
               <Route path="/profile" component={Profile} />
             </div>
           </main>
+
+          <Admin dataProvider={dataProvider}>
+            <Resource name="posts" list={PostList} edit={PostEdit} create ={PostCreate} />
+            <Resource name="users" list={ UserList} edit={ UserEdit }/>
+          </Admin>
+
           <footer className="footer">
             Team 4 ITSS Japanese
           </footer>
