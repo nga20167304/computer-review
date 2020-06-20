@@ -11,8 +11,9 @@ const Ram = require('./Ram');
 const Screen = require('./Screen');
 const SellWeb = require('./SellWeb');
 const SizeWeight = require('./SizeWeight');
+const Comment = require('./Comment');
 
-const Product = db.sequelize.define(
+let Product = db.sequelize.define(
   'Product',
   {
     id: {
@@ -91,6 +92,6 @@ Product.belongsTo(Ram, {foreignKey: 'ramId', as: 'ram'});
 Product.belongsTo(Screen, {foreignKey: 'screenId', as: 'screen'});
 Product.belongsTo(SellWeb, {foreignKey: 'webId', as: 'web'});
 Product.belongsTo(SizeWeight, {foreignKey: 'sizeAndWeightId', as: 'sizeAndWeight'});
-
+Product.hasMany(Comment, {as: 'comments'});
 
 module.exports = Product;

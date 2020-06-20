@@ -1,8 +1,9 @@
 const Sequelize = require('sequelize')
 const db = require('../database/db.js')
+// const Comment = require('./Comment');
 
-module.exports = db.sequelize.define(
-  'user',
+let User = db.sequelize.define(
+  'User',
   {
     id: {
       type: Sequelize.INTEGER,
@@ -20,10 +21,19 @@ module.exports = db.sequelize.define(
     },
     image: {
       type: Sequelize.STRING
+    },
+    role: {
+      type: Sequelize.STRING
     }
   }
   ,
   {
-    timestamps: false
+    timestamps: false,
+    underscored: true,
+    tableName: 'users'
   }
 )
+
+// User.hasMany(Comment, {as: 'comments'})
+
+module.exports = User;

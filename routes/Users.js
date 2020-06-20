@@ -157,4 +157,29 @@ users.get('/profile', (req, res) => {
     })
 })
 
+users.get('/', (req, res) => {
+  User.findAll({include: [{all: true}]})
+    .then(user => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.send('User does not exist')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+users.delete('/:userId', (req, res) => {
+  User.destroy({where: {id: req.params.userId}})
+    .then(number => {
+      if (number) {
+        res.json({mess: 'delete success'})
+      } else {
+        res.send('User does not exist')
+      }
+    })
+})
+
 module.exports = users

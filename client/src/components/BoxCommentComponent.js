@@ -27,18 +27,18 @@ class BoxCommentComponent extends Component {
   render() {
     return (
       <div className="row mt-5">
-        <div class="col-md-8 col-md-offset-3">
-          <div class="panel panel-info">
-            <div class="panel-body">
+        <div className="col-md-8 col-md-offset-3">
+          <div className="panel panel-info">
+            <div className="panel-body">
               <textarea
                 placeholder="コメントする..."
                 className="form-control"
                 value={this.state.comment}
                 onChange={this.handleChangeComment}
               ></textarea>
-              <form class="form-inline mt-3">
+              <form className="form-inline mt-3">
                 <button
-                  class="btn btn-primary pull-right"
+                  className="btn btn-primary pull-right"
                   type="button"
                   onClick={this.handleSubmit}
                 >

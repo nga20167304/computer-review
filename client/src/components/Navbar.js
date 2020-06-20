@@ -32,7 +32,7 @@ class Navbar extends Component {
         if (token) {
             const decoded = jwt_decode(token);
             console.log(token)
-            if(decoded.id===0) {
+            if(decoded.role==='admin') {
                 userLink = (
                     <ul className="navbar-nav">
 

@@ -16,6 +16,7 @@ class Profile extends Component {
       name: '',
       email: '',
       image: '',
+      role: '',
       errors: [],
       success: [],
       changeName: false,
@@ -51,6 +52,7 @@ class Profile extends Component {
       name: decoded.name,
       email: decoded.email,
       image: decoded.image,
+      role: decoded.role,
       newName: decoded.name
     })
   }
@@ -190,7 +192,7 @@ class Profile extends Component {
             <h1 className="text-center">PROFILE</h1>
           </div>
           <div style={{display:"flex", justifyContent:"center"}}>
-              <Button class="btn btn-default btn-circle"
+              <Button className="btn btn-default btn-circle"
               style={{border: "none", background: "none", borderRadius: "100%", width:"150px", height:"150px", padding:"0", margin:"0"}}
               onClick={this.handleClickChangeImage}
               >
@@ -211,7 +213,7 @@ class Profile extends Component {
                   <td><b>Name</b></td>
                   <td>
                     {this.state.changeName ?
-                      <input type="text" class="form-control my-2" name="newName" value={this.state.newName}
+                      <input type="text" className="form-control my-2" name="newName" value={this.state.newName}
                       onChange={this.onChange}
                       >
                       </input> :
@@ -230,6 +232,10 @@ class Profile extends Component {
                 <tr>
                   <td><b>Email</b></td>
                   <td>{this.state.email}</td>
+                </tr>
+                <tr>
+                  <td><b>Role</b></td>
+                  <td>{this.state.role}</td>
                 </tr>
                 <tr>
                   {this.state.changePassword ?
