@@ -275,7 +275,6 @@ class CompareScreen2 extends Component {
             </Table>
 
 
-
         //
         //                 <li>
         //                     {this.state.product2.web ?

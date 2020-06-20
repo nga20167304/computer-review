@@ -181,5 +181,14 @@ users.delete('/:userId', (req, res) => {
       }
     })
 })
+// router.delete('/delete/:id', (req, res) => {
+//   const { id } = req.params;
+//   db.collection('id').findOneAndDelete({id: id}, 
+//   (err, result) => {
+//   if (err) return res.send(500, err)
+//   console.log('got deleted');
+//   res.redirect('/');
+//   });
+// });
 
 module.exports = users
