@@ -35,15 +35,15 @@ users.post('/register',upload.single('image'), (req, res) => {
       email: req.body.email
     }
   }).then(user => {
-    
+
       if (!user) {
         const userData = {
           name: req.body.name,
           email: req.body.email,
           password: md5(req.body.password),
-          image: req.body.image
+          image: req.body.image,
         }
-        
+
         User.create(userData)
           .then(user => {
             res.json({errs: []});
@@ -75,7 +75,7 @@ users.put('/update', upload.single('image'), (req, res) => {
     // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
   }
   console.log('req body img ',req.body.image);
-  
+
   if(req.body.name) {
     userData['name'] = req.body.name;
   }
@@ -85,7 +85,7 @@ users.put('/update', upload.single('image'), (req, res) => {
   if(req.body.password) {
     userData['password'] = md5(req.body.password);
   }
-        
+
   User.update(userData, {where: {id: userData.id}})
     .then(result => {
       User.findOne({
@@ -119,7 +119,7 @@ users.post('/login', (req, res) => {
     }
   }).then(user => {
       if (user) {
-        
+
         if(md5(req.body.password) === user.password){
           let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
             expiresIn: 1440

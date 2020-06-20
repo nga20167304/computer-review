@@ -5,12 +5,21 @@ class BoxCommentComponent extends Component {
     super(props);
     this.state = {
       comment: "",
+      id: "",
+      name: "",
     };
   }
+
   handleSubmit = (event) => {
-    this.props.onAddToDo(this.state);
-    this.setState({ comment: "" });
+    const token = localStorage.usertoken
+    if (token) {
+      this.props.onAddToDo(this.state);
+      this.setState({comment: ""});
+    } else {
+      this.props.history.push(`/login`);
+    }
   };
+
   handleChangeComment = (event) => {
     this.setState({ comment: event.target.value });
   };
@@ -33,10 +42,10 @@ class BoxCommentComponent extends Component {
                   type="button"
                   onClick={this.handleSubmit}
                 >
-                  送信
+                  Comment
                 </button>
               </form>
-              <h5>コメント:</h5>
+              <h5>Comment:</h5>
             </div>
           </div>
         </div>

@@ -5,12 +5,15 @@ import axios from 'axios'
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Button, Image} from "react-bootstrap";
+import ListCommentComponent from "../components/ListCommentComponent";
+import BoxCommentComponent from "../components/BoxCommentComponent";
 
 class ProductScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
       product: {},
+      listComments: [],
     }
   }
 
@@ -26,6 +29,16 @@ class ProductScreen extends Component {
       .catch(err => console.log(err))
   }
 
+  handleAddToDo = (item) => {
+    this.state.listComments.push(item);
+    this.setState({ listComments: this.state.listComments });
+  };
+
+  handleDeleteToDo = (index) => {
+    this.state.listComments.splice(index, 1);
+    this.setState({ listComments: this.state.listComments });
+  };
+
   render(){
     console.log("params: ", this.props.match.params.id);
     console.log('product', this.state.product);
@@ -35,10 +48,18 @@ class ProductScreen extends Component {
       </div>
 
       <div className = "details">
-        <div className = "details-image">
-          <Image style={{width:'640px',height:'480px', marginLeft:'80px'}} className="product-image" src={this.state.product.image} alt="product"/>
+        <div>
+          <div className = "details-image">
+            <Image style={{width:'640px',height:'480px'}} className="product-image" src={this.state.product.image} alt="product"/>
+          </div>
+          <li>
+            Description:
+            <div className="product-description">
+              {this.state.product.description}
+            </div>
+          </li>
         </div>
-        <div className="details-info">
+        <div className="details-info" style={{marginLeft : '40px'}}>
           <ul>
             <li>
               <h2>{this.state.product.name}</h2>
@@ -48,12 +69,6 @@ class ProductScreen extends Component {
             </li>
             <li>
               Price: <b>${this.state.product.price}</b>
-            </li>
-            <li>
-              Description:
-              <div className="product-description">
-                {this.state.product.description}
-              </div>
             </li>
             <li>
               {this.state.product.board ?
@@ -169,6 +184,18 @@ class ProductScreen extends Component {
             </Button>
           </ul>
         </div>
+      </div>
+      <BoxCommentComponent onAddToDo={this.handleAddToDo} />
+      <div>
+        {this.state.listComments.map((item, index) => {
+          return (
+              <ListCommentComponent
+                  key={index}
+                  comment={item.comment}
+                  onToDoDelete={() => this.handleDeleteToDo(index)}/>
+
+          );
+        })}
       </div>
     </div>)
   }

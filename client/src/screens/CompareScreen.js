@@ -1,8 +1,6 @@
 import React, {Component} from 'react';
-// import data from '../data';
 import {Link} from 'react-router-dom'
 import axios from 'axios'
-// import '../template/style.css';
 import {Image} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
@@ -43,13 +41,13 @@ class HomeScreen extends Component {
         console.log(this.state);
         return (
             <div>
-                <div style={{display: "flex", justifyContent: "center", width: '40rem', marginTop : '0.5rem', marginLeft: '0.5rem'}}>
+                <div style={{display: "flex", justifyContent: "center", width: '40rem', marginTop : '0.5rem', marginLeft: '45rem'}}>
                     <div className="input-group">
                         <input
                             name="keyword"
                             type="text"
                             className="form-control mb-2 searchbar"
-                            placeholder="Search name or brand"
+                            placeholder="Product's name or brand..."
                             onChange={this.searchHandler}
                         />
                     </div>
