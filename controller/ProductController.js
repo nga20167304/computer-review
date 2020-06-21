@@ -25,6 +25,16 @@ exports.list_all_products = function(req, res) {
 };
 
 exports.create_a_product = function(req, res) {
+    if(req.file){
+
+        //link image for window
+        req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
+    
+        //link image for mac
+        // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
+    }else{
+        req.body.image = '/productImg/defaultimage';
+    }
     console.log("req.body")
     console.log(req.body)
     Product.create(req.body,{include: [{all: true}]}).then(
