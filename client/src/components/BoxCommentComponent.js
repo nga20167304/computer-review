@@ -4,16 +4,14 @@ class BoxCommentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
-      id: "",
-      name: "",
+      comment: ""
     };
   }
 
   handleSubmit = (event) => {
     const token = localStorage.usertoken
     if (token) {
-      this.props.onAddToDo(this.state);
+      this.props.onAddToDo(this.state.comment);
       this.setState({comment: ""});
     } else {
       this.props.history.push(`/login`);
@@ -26,30 +24,30 @@ class BoxCommentComponent extends Component {
 
   render() {
     return (
-      <div className="row mt-5">
-        <div className="col-md-8 col-md-offset-3">
-          <div className="panel panel-info">
-            <div className="panel-body">
+        <div style={{marginLeft:'15rem'}}>
+          <div className="col-md-8 col-md-offset-3">
+            <div className="panel panel-info">
+              <div className="panel-body">
               <textarea
-                placeholder="Viết gì đó..."
-                className="form-control"
-                value={this.state.comment}
-                onChange={this.handleChangeComment}
+                  placeholder="Viết gì đó đi....."
+                  className="form-control"
+                  value={this.state.comment}
+                  onChange={this.handleChangeComment}
               ></textarea>
-              <form className="form-inline mt-3">
-                <button
-                  className="btn btn-primary pull-right"
-                  type="button"
-                  onClick={this.handleSubmit}
-                >
-                  Comment
-                </button>
-              </form>
-              <h5>Comment:</h5>
+                <form className="form-inline mt-3">
+                  <button
+                      className="btn btn-primary pull-right"
+                      type="button"
+                      onClick={this.handleSubmit}
+                  >
+                    Comment
+                  </button>
+                </form>
+                <h5>Comment:</h5>
+              </div>
             </div>
           </div>
         </div>
-      </div>
     );
   }
 }

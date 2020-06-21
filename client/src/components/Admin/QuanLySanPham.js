@@ -113,9 +113,7 @@ class QuanLySanPham extends Component {
                                                         </Link>
                                                     </Button>
                                                     <Button style={{width: '6rem' }} onClick={()=>this.deleteProduct(product.id)}>
-                                                        <Link to={'/manage2'}>
                                                             Delete
-                                                        </Link>
                                                     </Button>
                                                 </td>
                                             </tr>

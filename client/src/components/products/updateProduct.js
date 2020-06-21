@@ -27,8 +27,6 @@ class updateProduct extends Component {
         this.onSubmit = this.onSubmit.bind(this)
     }
 
-
-
     onChange(e, parent) {
         if(!parent){
             console.log(`[${e.target.name}]: ${e.target.value}`);
@@ -40,48 +38,51 @@ class updateProduct extends Component {
         }
     }
     onSubmit(e) {
+        const productId = this.props.match.params.id;
         e.preventDefault()
-        const newProduct = {
-            name: this.state.name,
-            description: this.state.description,
-            price: this.state.price,
-            rating: this.state.rating,
-            availableProgram: this.state.availableProgram ? this.state.availableProgram : null,
-            battery: this.state.battery ? this.state.battery : null,
-            board: this.state.board ? this.state.board : null,
-            brand: this.state.brand ? this.state.brand : null,
-            cpu: this.state.cpu ? this.state.cpu : null,
-            graphic: this.state.graphic ? this.state.graphic : null,
-            harddisk: this.state.harddisk ? this.state.harddisk : null,
-            ram: this.state.ram ? this.state.ram : null,
-            screen: this.state.screen ? this.state.screen : null,
-            web: this.state.web ? this.state.web : null,
-            sizeAndWeight: this.state.sizeAndWeight ? this.state.sizeAndWeight : null,
-        }
-        if(this.state.name==='' || this.state.brand==='' || this.state.description===''
+               if(this.state.name==='' || this.state.brand==='' || this.state.description===''
             || this.state.price===''||this.state.rating===0){
             this.setState({alert:"There is an empty attribute!"})
             return false;
         }
+        let form_data = new FormData();
+        form_data.append('name', this.state.name);
+        form_data.append('description', this.state.description);
+        form_data.append('price', this.state.price);
+        form_data.append('rating', this.state.rating);
+        form_data.append('availableProgram', this.state.availableProgram ? this.state.availableProgram : null);
+        form_data.append('battery', this.state.battery ? this.state.battery : null);
+        form_data.append('board', this.state.board ? this.state.board : null);
+        form_data.append('brand', this.state.brand ? this.state.brand : null);
+        form_data.append('cpu', this.state.cpu ? this.state.cpu : null);
+        form_data.append('graphic', this.state.graphic ? this.state.graphic : null);
+        form_data.append('harddisk', this.state.harddisk ? this.state.harddisk : null);
+        form_data.append('ram', this.state.ram ? this.state.ram : null);
+        form_data.append('screen', this.state.screen ? this.state.screen : null);
+        form_data.append('web', this.state.web ? this.state.web : null);
+        form_data.append('sizeAndWeight', this.state.sizeAndWeight ? this.state.sizeAndWeight : null);
 
-        axios.post(`http://localhost:5000/products`, newProduct )
-            .then(res => {
-                console.log("new product: " + newProduct);
-                console.log("res = " +res);
-                console.log(res.data);
-                alert(`Create product ${res.data.name} successful!`);
-                this.props.history.push('/');
-            })
+        axios.put(`http://localhost:5000/products/${productId}`, form_data, {
+            headers: {
+                'content-type': 'multipart/form-data'
+            }
+        }).then(res => {
+            console.log("res = " +res);
+            console.log(res.data);
+            alert(`Update product ${res.data.name} successful!`);
+            this.props.history.push('/');
+        })
             .catch(err => {
                 console.log(err);
                 this.setState({alert: err})
                 return false;
-            })
-
+            });
         this.setState({
             name: '',
             description: '',
             price: '',
+            image: '',
+            imagePreviewUrl: '',
             rating: 0,
             availableProgram: {},
             battery: {},
@@ -99,32 +100,9 @@ class updateProduct extends Component {
         })
     }
 
-    _handleImageChange(e) {
-        e.preventDefault();
-
-        let reader = new FileReader();
-        let file = e.target.files[0];
-
-        reader.onloadend = () => {
-            this.setState({
-                image: file,
-                imagePreviewUrl: reader.result
-            });
-        }
-
-        console.log(this.state.image);
-
-        reader.readAsDataURL(file)
-    }
 
     render() {
-        let {imagePreviewUrl} = this.state;
-        let $imagePreview = null;
-        if (imagePreviewUrl) {
-            $imagePreview = (<div><img width="200" height="200" src={imagePreviewUrl} alt=""/></div>);
-        } else {
-            $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
-        }
+
         let alerts =this.state.alert===''?<div></div> : this.state.status===1?
             (<div className="alert alert-success alert-dismissible fade show" role="alert">
                 {this.state.alert}
@@ -146,7 +124,7 @@ class updateProduct extends Component {
                     <div className="col-md-6 mt-5 mx-auto">
                         {alerts}
                         <form noValidate onSubmit={this.onSubmit} className="create-product">
-                            <h1 style={{textAlign:"center"}}>Create new product</h1>
+                            <h1 style={{textAlign:"center"}}>Update product</h1>
                             <div className="form-group">
                                 <label htmlFor="name"><h3>Name</h3></label>
                                 <input
@@ -579,20 +557,12 @@ class updateProduct extends Component {
                                     />
                                 </div>
                             </div>
-                            <div className="form-group">
-                                <input className="fileInput"
-                                       name="image"
-                                       type="file"
-                                       onChange={(e)=>this._handleImageChange(e)} />
-                            </div>
-                            <div className="imgPreview">
-                                {$imagePreview}
-                            </div>
+
                             <button
                                 type="submit"
                                 className="btn btn-lg btn-primary btn-block"
                             >
-                                Create
+                                Update
                             </button>
                         </form>
                     </div>

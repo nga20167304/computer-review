@@ -26,7 +26,6 @@ export const register = newUser => {
 
 export const updateUser = user => {
   let form_data = new FormData();
-  // console.log('image ', newUser.image);
   form_data.append('id', user.id);
   if(user.image){
     form_data.append('image', user.image);

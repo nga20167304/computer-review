@@ -3,6 +3,23 @@ import {Link, withRouter} from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Dropdown, Image} from 'react-bootstrap';
 import jwt_decode from 'jwt-decode';
+import axios from 'axios'
+
+async function isExpiredToken(token) {
+    try {
+        const r = await axios.post('http://localhost:5000/users/login', {
+            token: token
+        })
+        console.log(r.data)
+        if (!r.data)
+            localStorage.removeItem('usertoken')
+        return await r.data
+    } catch(e) {
+        localStorage.removeItem('usertoken')
+        console.error(e.message)
+        return false
+    }
+}
 
 class Navbar extends Component {
     logOut(e) {
@@ -29,7 +46,9 @@ class Navbar extends Component {
 
         let userLink = loginRegLink;
         const token = localStorage.usertoken;
-        if (token) {
+        // TODO: check token is not expired
+
+        if (token !== undefined && isExpiredToken(token)) {
             const decoded = jwt_decode(token);
             console.log(token)
             if (decoded.role === 'Admin') {

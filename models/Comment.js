@@ -28,8 +28,4 @@ let Comment = db.sequelize.define(
 );
 
 Comment.belongsTo(User, {foreignKey: 'userId', as: 'user'});
-// Comment.belongsTo(require('./Product'), {foreignKey: 'productId'});
-// Comment.associate = function(models) {
-//     Comment.belongsTo(models.Company, {foreignKey: 'companyId', as: 'company'})
-// };
 module.exports = Comment;

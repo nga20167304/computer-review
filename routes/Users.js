@@ -113,6 +113,24 @@ users.put('/update', upload.single('image'), (req, res) => {
 })
 
 users.post('/login', (req, res) => {
+    // TODO: handle Token
+    console.log(req.body.token)
+    if (req.body.token) {
+        try {
+            const verify = jwt.verify(req.body.token, process.env.SECRET_KEY)
+            if (verify) {
+                res.send(true)
+                return true
+            }
+        } catch (e) {
+            console.error(e)
+            res.send(false)
+            return false
+        }
+        return false
+    }
+
+  // No Token
   User.findOne({
     where: {
       email: req.body.email
@@ -157,7 +175,7 @@ users.get('/profile', (req, res) => {
       })
 })
 
-users.get('/users', (req, res) => {
+users.get('/', (req, res) => {
   User.findAll({include: [{all: true}]})
       .then(user => {
         if (user) {
@@ -171,7 +189,7 @@ users.get('/users', (req, res) => {
       })
 })
 
-users.delete('/users/:userId', (req, res) => {
+users.delete('/:userId', (req, res) => {
   User.destroy({where: {id: req.params.userId}})
       .then(number => {
         if (number) {
