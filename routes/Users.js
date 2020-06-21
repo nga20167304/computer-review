@@ -138,6 +138,8 @@ users.post('/login', (req, res) => {
 })
 
 users.get('/profile', (req, res) => {
+  //test postman
+  // var decoded = jwt.verify(req.headers['authorization'].split(" ")[1], process.env.SECRET_KEY)
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOne({

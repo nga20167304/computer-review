@@ -4,16 +4,14 @@ class BoxCommentComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      comment: "",
-      id: "",
-      name: "",
+      comment: ""
     };
   }
 
   handleSubmit = (event) => {
     const token = localStorage.usertoken
     if (token) {
-      this.props.onAddToDo(this.state);
+      this.props.onAddToDo(this.state.comment);
       this.setState({comment: ""});
     } else {
       this.props.history.push(`/login`);

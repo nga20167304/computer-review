@@ -14,10 +14,14 @@ class ProductScreen extends Component {
   constructor(props){
     super(props)
     this.state = {
-      product: {},
+      product: {
+        comments: []
+      }
 
-      listComments: [],
+      // listComments: [],
     }
+    this.handleAddToDo = this.handleAddToDo.bind(this);
+    this.handleDeleteToDo = this.handleDeleteToDo.bind(this);
   }
 
   componentDidMount(){
@@ -31,15 +35,24 @@ class ProductScreen extends Component {
       })
       .catch(err => console.log(err))
   }
+  
 
-  handleAddToDo = (item) => {
-    this.state.listComments.push(item);
-    this.setState({ listComments: this.state.listComments });
+  handleAddToDo = (comment) => {
+    // this.state.product.comments.push(item);
+    console.log(comment);
+    axios.post(`http://localhost:5000/products/${this.state.product.id}/comment`, {content: comment, token: localStorage.usertoken} )
+      .then(res => {
+        this.setState({ product: {...this.state.product, comments: [...this.state.product.comments, res.data] }});
+      })
+      .catch(err => {
+          console.log(err);
+          return false;
+      })
   };
 
   handleDeleteToDo = (index) => {
-    this.state.listComments.splice(index, 1);
-    this.setState({ listComments: this.state.listComments });
+    this.state.product.comments.splice(index, 1);
+    this.setState({ product: {...this.state.product, comments: this.state.product.comments }});
   };
 
   render(){
@@ -191,7 +204,8 @@ class ProductScreen extends Component {
         </div>
       </div>
       <BoxCommentComponent onAddToDo={this.handleAddToDo} />
-      <div>
+
+      {/* <div>
         {this.state.listComments.map((item, index) => {
           return (
               <ListCommentComponent
@@ -201,6 +215,31 @@ class ProductScreen extends Component {
 
           );
         })}
+      </div> */}
+      <div>
+        { (() => 
+            {return !this.state.product.comments ? '' :
+              this.state.product.comments.map((item, index) => {
+                return (
+                    <ListCommentComponent
+                        key={index}
+                        comment={item}
+                        onToDoDelete={() => this.handleDeleteToDo(index)}/>
+      
+                );
+              })
+            }
+          )()
+        }
+        {/* {this.state.product.comments.map((item, index) => {
+          return (
+              <ListCommentComponent
+                  key={index}
+                  comment={item.user.name}
+                  onToDoDelete={() => this.handleDeleteToDo(index)}/>
+
+          );
+        })} */}
       </div>
     </div>)
   }

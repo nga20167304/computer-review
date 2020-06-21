@@ -91,7 +91,9 @@ exports.delete_a_product = function(req, res) {
 };
 
 exports.add_comment = function(req, res) {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
+    // test postman
+    // var decoded = jwt.verify(req.headers['authorization'].split(" ")[1], process.env.SECRET_KEY);
+    var decoded = jwt.verify(req.body.token, process.env.SECRET_KEY);
     if(!decoded) {
         res.send({mess: 'add comment error: error user token'});
         return;
@@ -112,12 +114,14 @@ exports.add_comment = function(req, res) {
 };
 
 exports.update_comment = function(req, res) {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
+    // test postman
+    // var decoded = jwt.verify(req.headers['authorization'].split(" ")[1], process.env.SECRET_KEY);
+    var decoded = jwt.verify(req.body.token, process.env.SECRET_KEY);
     if(!decoded) {
         res.send({mess: 'add comment error: error user token'});
         return;
     }
-    var comment = req.body;
+    var comment = {content: req.body.content};
     Comment.update(comment, {where: {id: req.params.commentId, userId: decoded.id}}).then(
         (number) => {
             if(!number){
@@ -130,7 +134,9 @@ exports.update_comment = function(req, res) {
 };
 
 exports.delete_comment = function(req, res) {
-    var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY);
+    // test postman
+    // var decoded = jwt.verify(req.headers['authorization'].split(" ")[1], process.env.SECRET_KEY);
+    var decoded = jwt.verify(req.body.token, process.env.SECRET_KEY);
     if(!decoded) {
         res.send({mess: 'add comment error: error user token'});
         return;
