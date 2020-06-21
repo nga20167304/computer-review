@@ -96,19 +96,43 @@ class createProduct extends Component {
       alert:'',
       status: 0
     })
-  } 
+  }
 
-  
+  _handleImageChange(e) {
+    e.preventDefault();
+
+    let reader = new FileReader();
+    let file = e.target.files[0];
+
+    reader.onloadend = () => {
+      this.setState({
+        image: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+
+    console.log(this.state.image);
+
+    reader.readAsDataURL(file)
+  }
+
   render() {
+    let {imagePreviewUrl} = this.state;
+    let $imagePreview = null;
+    if (imagePreviewUrl) {
+      $imagePreview = (<div><img width="200" height="200" src={imagePreviewUrl} alt=""/></div>);
+    } else {
+      $imagePreview = (<div className="previewText">Please select an Image for Preview</div>);
+    }
     let alerts =this.state.alert===''?<div></div> : this.state.status===1?
-            (<div className="alert alert-success alert-dismissible fade show" role="alert"> 
-                {this.state.alert} 
+            (<div className="alert alert-success alert-dismissible fade show" role="alert">
+                {this.state.alert}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
             </div>):
-            (<div className="alert alert-danger alert-dismissible fade show" role="alert"> 
-                {this.state.alert} 
+            (<div className="alert alert-danger alert-dismissible fade show" role="alert">
+                {this.state.alert}
             <button type="button" className="close" data-dismiss="alert" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
             </button>
@@ -554,7 +578,15 @@ class createProduct extends Component {
                   />
                 </div>
               </div>
-              
+              <div className="form-group">
+                <input className="fileInput"
+                       name="image"
+                       type="file"
+                       onChange={(e)=>this._handleImageChange(e)} />
+              </div>
+              <div className="imgPreview">
+                {$imagePreview}
+              </div>
               <button
                 type="submit"
                 className="btn btn-lg btn-primary btn-block"

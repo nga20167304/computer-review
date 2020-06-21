@@ -32,7 +32,7 @@ class Navbar extends Component {
         if (token) {
             const decoded = jwt_decode(token);
             console.log(token)
-            if(decoded.id===0) {
+            if (decoded.role === 'Admin') {
                 userLink = (
                     <ul className="navbar-nav">
 
@@ -45,6 +45,8 @@ class Navbar extends Component {
 
                             <Dropdown.Menu>
                                 <Dropdown.Item href="/create">Add Product</Dropdown.Item>
+                                <Dropdown.Item href="/manage2">Product Manage</Dropdown.Item>
+                                <Dropdown.Item href="/manage1">User Manage</Dropdown.Item>
                                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
                                 <Dropdown.Item href="https://www.google.cm/?gws_rd=ssl"
                                                onClick={this.logOut.bind(this)}>Logout</Dropdown.Item>
@@ -53,8 +55,7 @@ class Navbar extends Component {
 
                     </ul>
                 )
-            }
-            else{
+            } else {
                 userLink = (
                     <ul className="navbar-nav">
 
@@ -82,34 +83,23 @@ class Navbar extends Component {
         }
 
         return (
-            <nav className="navbar navbar-expand-lg navbar-dark bg-dark rounded">
-                <button
-                    className="navbar-toggler"
-                    type="button"
-                    data-toggle="collapse"
-                    data-target="#navbar1"
-                    aria-controls="navbar1"
-                    aria-expanded="false"
-                    aria-label="Toggle navigation"
-                >
-                    <span className="navbar-toggler-icon"/>
-                </button>
-                <div className="brand">
-                    <button onClick={openMenu}>
-                        &#9776;
-                    </button>
-                    <Link to="/">Home</Link>
-                </div>
-
-                <div
-                    className="collapse navbar-collapse"
-                    id="navbar1"
-                    style={{display: "flex", justifyContent: "flex-end", fontSize: "1em", alignItems: "center"}}
-                >
-                    <div>
-                        {localStorage.usertoken ? userLink : loginRegLink}
+            <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark rounded" style={{height:'5rem'}}>
+                    <div className="brand">
+                        <button onClick={openMenu}>
+                            &#9776;
+                        </button>
+                        <Link to="/">Home</Link>
                     </div>
-                </div>
+
+                    <div
+                        className="collapse navbar-collapse"
+                        id="navbar1"
+                        style={{display: "flex", justifyContent: "flex-end", fontSize: "1em", alignItems: "center"}}
+                    >
+                        <div>
+                            {localStorage.usertoken ? userLink : loginRegLink}
+                        </div>
+                    </div>
             </nav>
         )
     }

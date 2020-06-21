@@ -22,14 +22,6 @@ export const register = newUser => {
       }).catch(err => {
         console.log(err)
       })
-  // return axios
-  //   .post('users/register', {
-  //     name: newUser.name,
-  //     email: newUser.email,
-  //     password: newUser.password,
-  //     image: newUser.image
-  //   })
-    
 }
 
 export const updateUser = user => {
@@ -44,7 +36,7 @@ export const updateUser = user => {
   }
   if(user.password){
     form_data.append('password', user.password);
-  }    
+  }
     return axios.put('users/update', form_data, {
         headers: {
           'content-type': 'multipart/form-data'
@@ -61,14 +53,6 @@ export const updateUser = user => {
       .catch(err => {
         console.log(err)
       })
-  // return axios
-  //   .post('users/register', {
-  //     name: newUser.name,
-  //     email: newUser.email,
-  //     password: newUser.password,
-  //     image: newUser.image
-  //   })
-    
 }
 
 export const login = user => {
