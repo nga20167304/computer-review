@@ -7,7 +7,7 @@ import {Image} from "react-bootstrap";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faStar} from "@fortawesome/free-solid-svg-icons";
 
-class HomeScreen extends Component {
+class Price1 extends Component {
 
     constructor(props) {
         super(props)
@@ -21,7 +21,6 @@ class HomeScreen extends Component {
     searchingFor = (x, term) => {
         return term!==null & (x?.toLowerCase().includes(term.toLowerCase()));
     }
-
 
     searchHandler(event) {
         this.setState({term: event.target.value});
@@ -39,10 +38,13 @@ class HomeScreen extends Component {
             .catch(err => console.log(err))
     }
 
-
     render() {
         console.log(this.state);
         return (
+            <div>
+                <div className = "back">
+                    <Link to = "/" > Back </Link>
+                </div>
             <div>
                 <div style={{display: "flex", justifyContent: "center", width: '40rem', marginTop : '0.5rem', marginLeft: '45rem'}}>
                     <div className="input-group">
@@ -60,6 +62,7 @@ class HomeScreen extends Component {
                         this.state.listProduct
                             .filter((x) => this.searchingFor(x.name,this.state.term)||this.searchingFor(x.brand.name,this.state.term))
                             .map((product) => {
+                                if(product.price<3000){
                                 return (
                                     <div key={product.id} className="product shadow">
                                         <div style={{textAlign: 'center'}}>
@@ -76,15 +79,17 @@ class HomeScreen extends Component {
                                         <div className="product-rating">{product.rating}
                                             <FontAwesomeIcon icon={faStar} size="1x" color="orange"/>
                                         </div>
-                                    </div>)
+                                    </div>)}
+
                             })}
                 </div>
+            </div>
             </div>
         );
     }
 }
 
 
-export default HomeScreen;
+export default Price1;
 
 

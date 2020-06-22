@@ -16,6 +16,7 @@ class Profile extends Component {
       name: '',
       email: '',
       image: '',
+      role: '',
       errors: [],
       success: [],
       changeName: false,
@@ -51,6 +52,7 @@ class Profile extends Component {
       name: decoded.name,
       email: decoded.email,
       image: decoded.image,
+      role: decoded.role,
       newName: decoded.name
     })
   }
@@ -230,6 +232,10 @@ class Profile extends Component {
                 <tr>
                   <td><b>Email</b></td>
                   <td>{this.state.email}</td>
+                </tr>
+                <tr>
+                  <td><b>Role</b></td>
+                  <td>{this.state.role}</td>
                 </tr>
                 <tr>
                   {this.state.changePassword ?
