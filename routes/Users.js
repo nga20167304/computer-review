@@ -216,16 +216,6 @@ users.get('/', (req, res) => {
     })
 })
 
-users.delete('/:userId', (req, res) => {
-  User.destroy({where: {id: req.params.userId}})
-    .then(number => {
-      if (number) {
-        res.json({mess: 'delete success'})
-      } else {
-        res.send('User does not exist')
-      }
-    })
-})
 // router.delete('/delete/:id', (req, res) => {
 //   const { id } = req.params;
 //   db.collection('id').findOneAndDelete({id: id}, 

@@ -98,10 +98,10 @@ function App() {
             </div>
           </main>
 
-          <Admin dataProvider={dataProvider}>
+          {/* <Admin dataProvider={dataProvider}>
             <Resource name="posts" list={PostList} edit={PostEdit} create ={PostCreate} />
             <Resource name="users" list={ UserList} edit={ UserEdit }/>
-          </Admin>
+          </Admin> */}
 
           <footer className="footer">
             Team 4 ITSS Japanese
