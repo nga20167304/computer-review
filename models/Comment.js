@@ -21,7 +21,7 @@ let Comment = db.sequelize.define(
     }
     ,
     {
-        timestamps: true,
+        timestamps: false,
         underscored: true,
         tableName: 'comment'
     }

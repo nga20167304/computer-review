@@ -26,6 +26,7 @@ users.post('/register',upload.single('image'), (req, res) => {
 
     //link image for mac
     // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
+    //mở lại server vs client đi 
   }else{
     req.body.image = '/uploads/0e0a2b029b5b3116500043d49c2d2659';
   }

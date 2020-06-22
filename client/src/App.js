@@ -28,14 +28,6 @@ import Rating4 from "./screens/Rating4";
 import Rating3 from "./screens/Rating3";
 import Rating2 from "./screens/Rating2";
 
-import { Admin, Resource } from 'react-admin';
-import jsonServerProvider from 'ra-data-json-server';
-import { UserList, UserEdit } from './users'
-import { PostList, PostCreate, PostEdit } from './posts';
-// import myDataProvider from './myDataProvider'
-
-const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
-
 function App() {
 
   const closeMenu = () => {

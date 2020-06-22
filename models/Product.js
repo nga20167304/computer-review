@@ -78,7 +78,7 @@ let Product = db.sequelize.define(
     }
     ,
     {
-        timestamps: true,
+        timestamps: false,
         underscored: true,
         tableName: 'product'
 

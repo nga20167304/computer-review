@@ -5,7 +5,7 @@ import axios from 'axios'
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {Button, Image} from "react-bootstrap";
-import ListCommentComponent from "../components/ListCommentComponent";
+// import ListCommentComponent from "../components/ListCommentComponent";
 // import { Button} from "react-bootstrap";
 import BoxCommentComponent from "../components/BoxCommentComponent";
 import jwt_decode from "jwt-decode";
@@ -66,13 +66,14 @@ class ProductScreen extends Component {
           }})}
 
         })
+      }
 
-
-  render(){
+  render() {
     console.log("params: ", this.props.match.params.id);
     console.log('product', this.state.product);
 
-    return (<div>
+    return (
+    <div>
       <div className = "back">
         <Link to = "/" > Back </Link>
       </div>
@@ -232,11 +233,9 @@ class ProductScreen extends Component {
             }
         )()
         }
-
       </div>
     </div>)
+    }
   }
-
-}
 
 export default ProductScreen;
