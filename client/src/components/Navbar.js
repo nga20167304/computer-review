@@ -51,7 +51,11 @@ class Navbar extends Component {
         if (token !== undefined && isExpiredToken(token)) {
             const decoded = jwt_decode(token);
             console.log(token)
-            if (decoded.role === 'Admin') {
+// <<<<<<< master
+//             if (decoded.role === 'Admin') {
+// =======
+            if(decoded.role==='admin') {
+// >>>>>>> master
                 userLink = (
                     <ul className="navbar-nav">
 

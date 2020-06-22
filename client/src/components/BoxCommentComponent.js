@@ -34,17 +34,29 @@ class BoxCommentComponent extends Component {
                   value={this.state.comment}
                   onChange={this.handleChangeComment}
               ></textarea>
-                <form className="form-inline mt-3">
-                  <button
-                      className="btn btn-primary pull-right"
-                      type="button"
-                      onClick={this.handleSubmit}
-                  >
-                    Comment
-                  </button>
-                </form>
-                <h5>Comment:</h5>
-              </div>
+// <<<<<<< master
+//                 <form className="form-inline mt-3">
+//                   <button
+//                       className="btn btn-primary pull-right"
+//                       type="button"
+//                       onClick={this.handleSubmit}
+//                   >
+//                     Comment
+//                   </button>
+//                 </form>
+//                 <h5>Comment:</h5>
+//               </div>
+// =======
+              <form className="form-inline mt-3">
+                <button
+                  className="btn btn-primary pull-right"
+                  type="button"
+                  onClick={this.handleSubmit}
+                >
+                  Comment
+                </button>
+              </form>
+              <h5>Comment:</h5>
             </div>
           </div>
         </div>

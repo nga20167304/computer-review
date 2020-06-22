@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { BrowserRouter as Router, Route} from 'react-router-dom'
 import './App.css'
@@ -27,6 +28,14 @@ import Rating4 from "./screens/Rating4";
 import Rating3 from "./screens/Rating3";
 import Rating2 from "./screens/Rating2";
 
+import { Admin, Resource } from 'react-admin';
+import jsonServerProvider from 'ra-data-json-server';
+import { UserList, UserEdit } from './users'
+import { PostList, PostCreate, PostEdit } from './posts';
+// import myDataProvider from './myDataProvider'
+
+const dataProvider = jsonServerProvider('https://jsonplaceholder.typicode.com');
+
 function App() {
 
   const closeMenu = () => {
@@ -36,7 +45,7 @@ function App() {
       <Router>
 
         <div className="grid-container">
-        <Navbar/>
+        <Navbar />
 
           <aside className='sidebar bg-dark' style={{textAlign:'right', marginTop:'5rem', marginBottom:'5rem'}}>
             <h1><Button variant="light" style={{marginRight:'0.5rem', borderRadius:'50%'}} onClick={closeMenu} >X</Button></h1>
@@ -88,6 +97,12 @@ function App() {
               <Route path="/update/:id" component={updateProduct} />
             </div>
           </main>
+
+          <Admin dataProvider={dataProvider}>
+            <Resource name="posts" list={PostList} edit={PostEdit} create ={PostCreate} />
+            <Resource name="users" list={ UserList} edit={ UserEdit }/>
+          </Admin>
+
           <footer className="footer">
             Team 4 ITSS Japanese
           </footer>

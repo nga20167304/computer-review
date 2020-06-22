@@ -32,8 +32,10 @@ let User = db.sequelize.define(
         underscored: true,
         tableName: 'users'
     }
+
 )
 
 // User.hasMany(Comment, {as: 'comments'})
 
 module.exports = User;
+

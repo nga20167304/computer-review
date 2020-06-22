@@ -156,6 +156,8 @@ users.post('/login', (req, res) => {
 })
 
 users.get('/profile', (req, res) => {
+  //test postman
+  // var decoded = jwt.verify(req.headers['authorization'].split(" ")[1], process.env.SECRET_KEY)
   var decoded = jwt.verify(req.headers['authorization'], process.env.SECRET_KEY)
 
   User.findOne({
@@ -199,5 +201,39 @@ users.delete('/:userId', (req, res) => {
         }
       })
 })
+
+users.get('/', (req, res) => {
+  User.findAll({include: [{all: true}]})
+    .then(user => {
+      if (user) {
+        res.json(user)
+      } else {
+        res.send('User does not exist')
+      }
+    })
+    .catch(err => {
+      res.send('error: ' + err)
+    })
+})
+
+users.delete('/:userId', (req, res) => {
+  User.destroy({where: {id: req.params.userId}})
+    .then(number => {
+      if (number) {
+        res.json({mess: 'delete success'})
+      } else {
+        res.send('User does not exist')
+      }
+    })
+})
+// router.delete('/delete/:id', (req, res) => {
+//   const { id } = req.params;
+//   db.collection('id').findOneAndDelete({id: id}, 
+//   (err, result) => {
+//   if (err) return res.send(500, err)
+//   console.log('got deleted');
+//   res.redirect('/');
+//   });
+// });
 
 module.exports = users

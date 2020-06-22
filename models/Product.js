@@ -81,6 +81,7 @@ let Product = db.sequelize.define(
         timestamps: true,
         underscored: true,
         tableName: 'product'
+
     }
 )
 
@@ -98,3 +99,4 @@ Product.belongsTo(SizeWeight, {foreignKey: 'sizeAndWeightId', as: 'sizeAndWeight
 Product.hasMany(Comment, {as: 'comments'});
 
 module.exports = Product;
+

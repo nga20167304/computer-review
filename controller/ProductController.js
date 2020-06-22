@@ -29,7 +29,7 @@ exports.create_a_product = function(req, res) {
 
         //link image for window
         req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
-
+      
         //link image for mac
         // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
     }else{
@@ -77,6 +77,7 @@ exports.update_a_product = function(req, res) {
                     }
                 );
             });
+
         }
     );
 };

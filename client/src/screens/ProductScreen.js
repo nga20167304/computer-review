@@ -11,6 +11,7 @@ import BoxCommentComponent from "../components/BoxCommentComponent";
 import jwt_decode from "jwt-decode";
 
 
+
 class ProductScreen extends Component {
   constructor(props){
     super(props)
@@ -34,6 +35,7 @@ class ProductScreen extends Component {
         })
         .catch(err => console.log(err))
   }
+  
 
 
   handleAddToDo = (comment) => {
@@ -65,7 +67,6 @@ class ProductScreen extends Component {
 
         })
 
-  };
 
   render(){
     console.log("params: ", this.props.match.params.id);
@@ -231,6 +232,7 @@ class ProductScreen extends Component {
             }
         )()
         }
+
       </div>
     </div>)
   }

@@ -22,6 +22,7 @@ class HomeScreen extends Component {
         return term!==null & (x?.toLowerCase().includes(term.toLowerCase()));
     }
 
+
     searchHandler(event) {
         this.setState({term: event.target.value});
     }
@@ -37,6 +38,7 @@ class HomeScreen extends Component {
             })
             .catch(err => console.log(err))
     }
+
 
     render() {
         console.log(this.state);
