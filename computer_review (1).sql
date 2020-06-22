@@ -230,9 +230,9 @@ CREATE TABLE `product` (
   `program_id` int(11) DEFAULT NULL,
   `battery_id` int(11) DEFAULT NULL,
   `size_and_weight_id` int(11) DEFAULT NULL,
-  `security_id` int(11) DEFAULT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  `security_id` int(11) DEFAULT NULL
+  -- `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  -- `updated_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
