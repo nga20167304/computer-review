@@ -17,7 +17,6 @@ class ProductScreen extends Component {
     super(props)
     this.state = {
       product: {
-        comments: []
       }
     }
     this.handleAddToDo = this.handleAddToDo.bind(this);
@@ -211,8 +210,8 @@ class ProductScreen extends Component {
               }
             </li>
 
-            <Button style={{width: '50%'}} className="button compare-button btn-info" >
-              <Link to={'/compare/' + this.state.product.id}> Compare</Link>
+            <Button style={{width: '50%'}} className="button compare-button btn-info" onClick={()=>this.props.history.push(`/compare/${this.state.product.id}`)}>
+              Compare
             </Button>
           </ul>
         </div>

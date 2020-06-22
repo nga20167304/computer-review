@@ -86,23 +86,26 @@ class createProduct extends Component {
 
     // console.log(newProduct);
 
+    console.log("state availableProgram: ");
+    console.log(this.state.availableProgram);
+
     let form_data = new FormData();
     form_data.append('name', this.state.name);
     form_data.append('description', this.state.description);
     form_data.append('image', this.state.image);
     form_data.append('price', this.state.price);
     form_data.append('rating', this.state.rating);
-    form_data.append('availableProgram', this.state.availableProgram ? this.state.availableProgram : null);
-    form_data.append('battery', this.state.battery ? this.state.battery : null);
-    form_data.append('board', this.state.board ? this.state.board : null);
-    form_data.append('brand', this.state.brand ? this.state.brand : null);
-    form_data.append('cpu', this.state.cpu ? this.state.cpu : null);
-    form_data.append('graphic', this.state.graphic ? this.state.graphic : null);
-    form_data.append('harddisk', this.state.harddisk ? this.state.harddisk : null);
-    form_data.append('ram', this.state.ram ? this.state.ram : null);
-    form_data.append('screen', this.state.screen ? this.state.screen : null);
-    form_data.append('web', this.state.web ? this.state.web : null);
-    form_data.append('sizeAndWeight', this.state.sizeAndWeight ? this.state.sizeAndWeight : null);
+    form_data.append('availableProgram', this.state.availableProgram ? JSON.stringify(this.state.availableProgram) : null);
+    form_data.append('battery', this.state.battery ? JSON.stringify(this.state.battery) : null);
+    form_data.append('board', this.state.board ? JSON.stringify(this.state.board) : null);
+    form_data.append('brand', this.state.brand ? JSON.stringify(this.state.brand) : null);
+    form_data.append('cpu', this.state.cpu ? JSON.stringify(this.state.cpu) : null);
+    form_data.append('graphic', this.state.graphic ? JSON.stringify(this.state.graphic) : null);
+    form_data.append('harddisk', this.state.harddisk ? JSON.stringify(this.state.harddisk ): null);
+    form_data.append('ram', this.state.ram ? JSON.stringify(this.state.ram) : null);
+    form_data.append('screen', this.state.screen ? JSON.stringify(this.state.screen) : null);
+    form_data.append('web', this.state.web ? JSON.stringify(this.state.web) : null);
+    form_data.append('sizeAndWeight', this.state.sizeAndWeight ? JSON.stringify(this.state.sizeAndWeight) : null);
 
     axios.post('http://localhost:5000/products', form_data, {
       headers: {

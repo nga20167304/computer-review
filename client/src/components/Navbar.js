@@ -54,7 +54,7 @@ class Navbar extends Component {
 // <<<<<<< master
 //             if (decoded.role === 'Admin') {
 // =======
-            if(decoded.role==='Admin') {
+            if(decoded.role==='admin') {
 // >>>>>>> master
                 userLink = (
                     <ul className="navbar-nav">
