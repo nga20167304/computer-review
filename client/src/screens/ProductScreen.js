@@ -196,7 +196,7 @@ class ProductScreen extends Component {
               {this.state.product.web ?
                   (<ul>
                     <li>Sell Web</li>
-                    <li>Link: <a target="_blank" href={this.state.product.web.link}>{this.state.product.web.name}</a></li>
+                    <li>Link: <a target="_blank" rel="noopener noreferrer"  href={this.state.product.web.link}>{this.state.product.web.name}</a></li>
                   </ul>) : ''
               }
             </li>
