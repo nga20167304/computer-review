@@ -14,71 +14,75 @@ const SizeWeight = require('./SizeWeight');
 const Comment = require('./Comment');
 
 let Product = db.sequelize.define(
-  'Product',
-  {
-    id: {
-      type: Sequelize.INTEGER,
-      primaryKey: true,
-      autoIncrement: true
-    },
-    name: {
-      type: Sequelize.STRING
-    },
-    price: {
-      type: Sequelize.BIGINT
-    },
-    rating: {
-      type: Sequelize.INTEGER
-    },
-    description: {
-      type: Sequelize.TEXT
-    },
-    image: {
-      type: Sequelize.STRING
-    },
-    webId: {
-      type: Sequelize.INTEGER
-    },
-    brandId: {
-      type: Sequelize.INTEGER
-    },
-    cpuId: {
-      type: Sequelize.INTEGER
-    },
-    boardId: {
-      type: Sequelize.INTEGER
-    },
-    ramId: {
-      type: Sequelize.INTEGER
-    },
-    harddiskId: {
-      type: Sequelize.INTEGER
-    },
-    graphicsId: {
-      type: Sequelize.INTEGER
-    },
-    screenId: {
-      type: Sequelize.INTEGER
-    },
-    programId: {
-      type: Sequelize.INTEGER
-    },
-    batteryId: {
-      type: Sequelize.INTEGER
-    },
-    sizeAndWeightId: {
-      type: Sequelize.INTEGER
-    },
-    securityId: {
-      type: Sequelize.INTEGER
+    'Product',
+    {
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        name: {
+            type: Sequelize.STRING
+        },
+        price: {
+            type: Sequelize.BIGINT
+        },
+        rating: {
+            type: Sequelize.INTEGER
+        },
+        description: {
+            type: Sequelize.TEXT
+        },
+        image: {
+            type: Sequelize.STRING
+        },
+        webId: {
+            type: Sequelize.INTEGER
+        },
+        brandId: {
+            type: Sequelize.INTEGER
+        },
+        cpuId: {
+            type: Sequelize.INTEGER
+        },
+        boardId: {
+            type: Sequelize.INTEGER
+        },
+        ramId: {
+            type: Sequelize.INTEGER
+        },
+        harddiskId: {
+            type: Sequelize.INTEGER
+        },
+        graphicsId: {
+            type: Sequelize.INTEGER
+        },
+        screenId: {
+            type: Sequelize.INTEGER
+        },
+        programId: {
+            type: Sequelize.INTEGER
+        },
+        batteryId: {
+            type: Sequelize.INTEGER
+        },
+        sizeAndWeightId: {
+            type: Sequelize.INTEGER
+        },
+        securityId: {
+            type: Sequelize.INTEGER
+        },
+        image: {
+            type: Sequelize.STRING
+        }
     }
-  }
-  ,
-  {
-    timestamps: true,
-    underscored: true,
-    tableName: 'product'
-  }
+    ,
+    {
+        timestamps: true,
+        underscored: true,
+        tableName: 'product'
+
+    }
 )
 
 Product.belongsTo(AvailableProgram, {foreignKey: 'programId', as: 'availableProgram'});
@@ -95,3 +99,4 @@ Product.belongsTo(SizeWeight, {foreignKey: 'sizeAndWeightId', as: 'sizeAndWeight
 Product.hasMany(Comment, {as: 'comments'});
 
 module.exports = Product;
+

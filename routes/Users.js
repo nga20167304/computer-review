@@ -36,28 +36,28 @@ users.post('/register',upload.single('image'), (req, res) => {
     }
   }).then(user => {
 
-      if (!user) {
-        const userData = {
-          name: req.body.name,
-          email: req.body.email,
-          password: md5(req.body.password),
-          image: req.body.image,
-        }
+    if (!user) {
+      const userData = {
+        name: req.body.name,
+        email: req.body.email,
+        password: md5(req.body.password),
+        image: req.body.image,
+      }
 
-        User.create(userData)
+      User.create(userData)
           .then(user => {
             res.json({errs: []});
           })
           .catch(err => {
             res.send('error: ' + err);
           })
-      } else {
-        if(req.file) unlinkAsync(req.file.path);
-        res.json({errs: [user.email + ' existed!']});
-      }
-    }).catch(err => {
-      res.send('error: ' + err);
-      })
+    } else {
+      if(req.file) unlinkAsync(req.file.path);
+      res.json({errs: [user.email + ' existed!']});
+    }
+  }).catch(err => {
+    res.send('error: ' + err);
+  })
 })
 
 users.put('/update', upload.single('image'), (req, res) => {
@@ -87,12 +87,12 @@ users.put('/update', upload.single('image'), (req, res) => {
   }
 
   User.update(userData, {where: {id: userData.id}})
-    .then(result => {
-      User.findOne({
-        where: {
-          id: userData.id
-        }
-      }).then(user => {
+      .then(result => {
+        User.findOne({
+          where: {
+            id: userData.id
+          }
+        }).then(user => {
           if (user) {
             let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
               expiresIn: 1440
@@ -102,39 +102,57 @@ users.put('/update', upload.single('image'), (req, res) => {
             res.send('User does not exist')
           }
         })
-        .catch(err => {
-            res.send('error: ' + err)
-          })
-    })
-    .catch(err => {
+            .catch(err => {
+              res.send('error: ' + err)
+            })
+      })
+      .catch(err => {
         if(req.file) unlinkAsync(req.file.path);
         res.send('error: ' + err);
       })
 })
 
 users.post('/login', (req, res) => {
+    // TODO: handle Token
+    console.log(req.body.token)
+    if (req.body.token) {
+        try {
+            const verify = jwt.verify(req.body.token, process.env.SECRET_KEY)
+            if (verify) {
+                res.send(true)
+                return true
+            }
+        } catch (e) {
+            console.error(e)
+            res.send(false)
+            return false
+        }
+        return false
+    }
+
+  // No Token
   User.findOne({
     where: {
       email: req.body.email
     }
   }).then(user => {
-      if (user) {
+    if (user) {
 
-        if(md5(req.body.password) === user.password){
-          let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
-            expiresIn: 1440
-          })
-          res.send(token);
-          // res.send(user);
-        }else {
-          res.json({errs: ['Wrong email or password']});
-        }
-      } else {
+      if(md5(req.body.password) === user.password){
+        let token = jwt.sign(user.dataValues, process.env.SECRET_KEY, {
+          expiresIn: 1440
+        })
+        res.send(token);
+        // res.send(user);
+      }else {
         res.json({errs: ['Wrong email or password']});
       }
-    }).catch(err => {
-        res.status(400).json({ error: err })
-      })
+    } else {
+      res.json({errs: ['Wrong email or password']});
+    }
+  }).catch(err => {
+    res.status(400).json({ error: err })
+  })
 })
 
 users.get('/profile', (req, res) => {
@@ -147,16 +165,41 @@ users.get('/profile', (req, res) => {
       id: decoded.id
     }
   })
-    .then(user => {
-      if (user) {
-        res.json(user)
-      } else {
-        res.send('User does not exist')
-      }
-    })
-    .catch(err => {
-      res.send('error: ' + err)
-    })
+      .then(user => {
+        if (user) {
+          res.json(user)
+        } else {
+          res.send('User does not exist')
+        }
+      })
+      .catch(err => {
+        res.send('error: ' + err)
+      })
+})
+
+users.get('/', (req, res) => {
+  User.findAll({include: [{all: true}]})
+      .then(user => {
+        if (user) {
+          res.json(user)
+        } else {
+          res.send('User does not exist')
+        }
+      })
+      .catch(err => {
+        res.send('error: ' + err)
+      })
+})
+
+users.delete('/:userId', (req, res) => {
+  User.destroy({where: {id: req.params.userId}})
+      .then(number => {
+        if (number) {
+          res.json({mess: 'delete success'})
+        } else {
+          res.send('User does not exist')
+        }
+      })
 })
 
 users.get('/', (req, res) => {

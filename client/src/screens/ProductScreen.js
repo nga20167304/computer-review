@@ -8,6 +8,8 @@ import {Button, Image} from "react-bootstrap";
 import ListCommentComponent from "../components/ListCommentComponent";
 // import { Button} from "react-bootstrap";
 import BoxCommentComponent from "../components/BoxCommentComponent";
+import jwt_decode from "jwt-decode";
+
 
 
 class ProductScreen extends Component {
@@ -17,8 +19,6 @@ class ProductScreen extends Component {
       product: {
         comments: []
       }
-
-      // listComments: [],
     }
     this.handleAddToDo = this.handleAddToDo.bind(this);
     this.handleDeleteToDo = this.handleDeleteToDo.bind(this);
@@ -27,33 +27,46 @@ class ProductScreen extends Component {
   componentDidMount(){
     const productId = this.props.match.params.id;
     axios.get(`http://localhost:5000/products/${productId}`, null)
-      .then(res => {
-        this.setState({
-          product: res.data
+        .then(res => {
+          this.setState({
+            product: res.data
+          })
+          console.log('res data: ', this.state.product);
         })
-        console.log('res data: ', this.state.product);
-      })
-      .catch(err => console.log(err))
+        .catch(err => console.log(err))
   }
   
 
+
   handleAddToDo = (comment) => {
     // this.state.product.comments.push(item);
-    console.log(comment);
     axios.post(`http://localhost:5000/products/${this.state.product.id}/comment`, {content: comment, token: localStorage.usertoken} )
-      .then(res => {
-        this.setState({ product: {...this.state.product, comments: [...this.state.product.comments, res.data] }});
-      })
-      .catch(err => {
+        .then(res => {
+          this.setState({ product: {...this.state.product, comments: [...this.state.product.comments, res.data] }});
+        })
+        .catch(err => {
           console.log(err);
           return false;
-      })
+        })
   };
 
-  handleDeleteToDo = (index) => {
-    this.state.product.comments.splice(index, 1);
-    this.setState({ product: {...this.state.product, comments: this.state.product.comments }});
-  };
+  handleDeleteToDo = (id , userId) => {
+    // this.state.product.comments.splice(index, 1);
+    console.log(localStorage.usertoken)
+    axios.delete(`http://localhost:5000/products/${this.state.product.id}/comment/${id}`, {
+      data: {
+        token: localStorage.usertoken
+      }
+    })
+        .then(r => {
+          const decoded = jwt_decode(localStorage.usertoken);
+          if(userId === decoded.id )
+
+          {this.setState({product: {...this.state.product, comments: this.state.product.comments.filter(v => v.id !== id)
+          }})}
+
+        })
+
 
   render(){
     console.log("params: ", this.props.match.params.id);
@@ -90,110 +103,110 @@ class ProductScreen extends Component {
             </li>
             <li>
               {this.state.product.board ?
-                (<ul>
-                  <li>Board</li>
-                  <li>Chip: {this.state.product.board.chip}</li>
-                  <li>Bus: {this.state.product.board.bus}</li>
-                  <li>Ram: {this.state.product.board.ram}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Board</li>
+                    <li>Chip: {this.state.product.board.chip}</li>
+                    <li>Bus: {this.state.product.board.bus}</li>
+                    <li>Ram: {this.state.product.board.ram}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.availableProgram ?
-                (<ul>
-                  <li>Available Program</li>
-                  <li>OS: {this.state.product.availableProgram.operatingSystem}</li>
-                  <li>Used By Software: {this.state.product.availableProgram.usedBySoftware}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Available Program</li>
+                    <li>OS: {this.state.product.availableProgram.operatingSystem}</li>
+                    <li>Used By Software: {this.state.product.availableProgram.usedBySoftware}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.battery ?
-                (<ul>
-                  <li>Battery</li>
-                  <li>Species: {this.state.product.battery.species}</li>
-                  <li>Type: {this.state.product.battery.type}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Battery</li>
+                    <li>Species: {this.state.product.battery.species}</li>
+                    <li>Type: {this.state.product.battery.type}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.brand ?
-                (<ul>
-                  <li>Brand</li>
-                  <li>Name: {this.state.product.brand.name}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Brand</li>
+                    <li>Name: {this.state.product.brand.name}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.cpu ?
-                (<ul>
-                  <li>CPU</li>
-                  <li>Brand: {this.state.product.cpu.brand}</li>
-                  <li>Technology: {this.state.product.cpu.technology}</li>
-                  <li>Type: {this.state.product.cpu.type}</li>
-                  <li>Speed: {this.state.product.cpu.speed}</li>
-                  <li>Cache: {this.state.product.cpu.cache}</li>
-                  <li>Max Speed: {this.state.product.cpu.maxSpeed}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>CPU</li>
+                    <li>Brand: {this.state.product.cpu.brand}</li>
+                    <li>Technology: {this.state.product.cpu.technology}</li>
+                    <li>Type: {this.state.product.cpu.type}</li>
+                    <li>Speed: {this.state.product.cpu.speed}</li>
+                    <li>Cache: {this.state.product.cpu.cache}</li>
+                    <li>Max Speed: {this.state.product.cpu.maxSpeed}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.graphic ?
-                (<ul>
-                  <li>Graphic</li>
-                  <li>Chipset: {this.state.product.graphic.chipset}</li>
-                  <li>Memory: {this.state.product.graphic.memory}</li>
-                  <li>Design style: {this.state.product.graphic.designStyle}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Graphic</li>
+                    <li>Chipset: {this.state.product.graphic.chipset}</li>
+                    <li>Memory: {this.state.product.graphic.memory}</li>
+                    <li>Design style: {this.state.product.graphic.designStyle}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.harddisk ?
-                (<ul>
-                  <li>Hard disk</li>
-                  <li>Capacity: {this.state.product.harddisk.capacity}</li>
-                  <li>Type: {this.state.product.harddisk.type}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Hard disk</li>
+                    <li>Capacity: {this.state.product.harddisk.capacity}</li>
+                    <li>Type: {this.state.product.harddisk.type}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.ram ?
-                (<ul>
-                  <li>Ram</li>
-                  <li>Capacity: {this.state.product.ram.capacity}</li>
-                  <li>Type: {this.state.product.ram.type}</li>
-                  <li>Bus speed: {this.state.product.ram.busSpeed}</li>
-                  <li>Slots: {this.state.product.ram.slots}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Ram</li>
+                    <li>Capacity: {this.state.product.ram.capacity}</li>
+                    <li>Type: {this.state.product.ram.type}</li>
+                    <li>Bus speed: {this.state.product.ram.busSpeed}</li>
+                    <li>Slots: {this.state.product.ram.slots}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.screen ?
-                (<ul>
-                  <li>Screen</li>
-                  <li>Size: {this.state.product.screen.size}</li>
-                  <li>Resolution: {this.state.product.screen.resolution}</li>
-                  <li>Technology: {this.state.product.screen.technology}</li>
-                  <li>Sensor: {this.state.product.screen.sensor}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Screen</li>
+                    <li>Size: {this.state.product.screen.size}</li>
+                    <li>Resolution: {this.state.product.screen.resolution}</li>
+                    <li>Technology: {this.state.product.screen.technology}</li>
+                    <li>Sensor: {this.state.product.screen.sensor}</li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.web ?
-                (<ul>
-                  <li>Sell Web</li>
-                  <li>Link: <a target="_blank" href={this.state.product.web.link}>{this.state.product.web.name}</a></li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Sell Web</li>
+                    <li>Link: <a target="_blank" href={this.state.product.web.link}>{this.state.product.web.name}</a></li>
+                  </ul>) : ''
               }
             </li>
             <li>
               {this.state.product.sizeAndWeight ?
-                (<ul>
-                  <li>Size & Weight</li>
-                  <li>Size: {this.state.product.sizeAndWeight.size}</li>
-                  <li>Weight: {this.state.product.sizeAndWeight.weight}</li>
-                  <li>Material: {this.state.product.sizeAndWeight.material}</li>
-                </ul>) : ''
+                  (<ul>
+                    <li>Size & Weight</li>
+                    <li>Size: {this.state.product.sizeAndWeight.size}</li>
+                    <li>Weight: {this.state.product.sizeAndWeight.weight}</li>
+                    <li>Material: {this.state.product.sizeAndWeight.material}</li>
+                  </ul>) : ''
               }
             </li>
 
@@ -204,42 +217,22 @@ class ProductScreen extends Component {
         </div>
       </div>
       <BoxCommentComponent onAddToDo={this.handleAddToDo} />
-
-      {/* <div>
-        {this.state.listComments.map((item, index) => {
-          return (
-              <ListCommentComponent
-                  key={index}
-                  comment={item.comment}
-                  onToDoDelete={() => this.handleDeleteToDo(index)}/>
-
-          );
-        })}
-      </div> */}
       <div>
-        { (() => 
+        { (() =>
             {return !this.state.product.comments ? '' :
-              this.state.product.comments.map((item, index) => {
-                return (
-                    <ListCommentComponent
-                        key={index}
-                        comment={item}
-                        onToDoDelete={() => this.handleDeleteToDo(index)}/>
-      
-                );
-              })
+                this.state.product.comments.map((item, index) => {
+                  return (
+                      <div className="ToDoListItem col-md-8" style={{textAlign:'right', marginLeft:'15rem'}}>
+                        <div className="ToDoListItem-comment col-md-8" style={{textAlign:'left'}}><b>{item.user.name}</b></div>
+                        <div className="ToDoListItem-comment col-md-8" style={{textAlign:'left'}}>{item.content}</div>
+                        <Button onClick={()=>this.handleDeleteToDo(item.id, item.user.id)}>Delete</Button>
+                      </div>
+                  );
+                })
             }
-          )()
+        )()
         }
-        {/* {this.state.product.comments.map((item, index) => {
-          return (
-              <ListCommentComponent
-                  key={index}
-                  comment={item.user.name}
-                  onToDoDelete={() => this.handleDeleteToDo(index)}/>
 
-          );
-        })} */}
       </div>
     </div>)
   }

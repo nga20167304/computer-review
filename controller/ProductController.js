@@ -29,7 +29,7 @@ exports.create_a_product = function(req, res) {
 
         //link image for window
         req.body.image = '/' + req.file.path.split('\\').slice(1).join('/');
-    
+      
         //link image for mac
         // req.body.image = '/' + req.file.path.split('/').slice(1).join('/');
     }else{
@@ -70,13 +70,14 @@ exports.update_a_product = function(req, res) {
                 Screen.update(newProduct.screen, {where: {id: product.screenId}}),
                 SellWeb.update(newProduct.web, {where: {id: product.webId}}),
                 SizeWeight.update(newProduct.sizeAndWeight, {where: {id: product.sizeAndWeightId}}),
-            ]).then(values => { 
+            ]).then(values => {
                 Product.findByPk(req.params.productId, {include: [{all: true}]}).then(
                     (product) => {
                         res.send(product);
                     }
                 );
-            });     
+            });
+
         }
     );
 };
@@ -85,7 +86,7 @@ exports.delete_a_product = function(req, res) {
     Product.findByPk(req.params.productId, {include: [{all: true}]}).then(
         (product) => {
             product.destroy();
-            res.send({mess: 'delete success'});       
+            res.send({mess: 'delete success'});
         }
     );
 };
@@ -103,7 +104,7 @@ exports.add_comment = function(req, res) {
     comment = {...comment, userId: decoded.id, productId: req.params.productId};
     Comment.create(comment).then(
         (newComment) => {
-            return Comment.findByPk(newComment.id, {include: [{all: true}]});    
+            return Comment.findByPk(newComment.id, {include: [{all: true}]});
         }
     ).then(
         (newComment) => {
@@ -128,7 +129,7 @@ exports.update_comment = function(req, res) {
                 res.send({mess: 'update fail'});
             }else{
                 res.send({mess: 'update success'});
-            }       
+            }
         }
     );
 };
@@ -147,7 +148,7 @@ exports.delete_comment = function(req, res) {
                 res.send({mess: 'delete fail'});
             }else{
                 res.send({mess: 'delete success'});
-            }       
+            }
         }
     );
 };

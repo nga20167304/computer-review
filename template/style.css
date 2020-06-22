@@ -9,7 +9,7 @@ html{
   }
   .grid-container{
     display: grid;
-    grid-template-areas: 
+    grid-template-areas:
     "header"
     "main"
     "footer";
@@ -36,7 +36,7 @@ html{
     color:#ffffff;
     text-decoration: none;
     padding: 1rem;
-  
+
   }
   .header-links a:hover{
     color:#ff8000;
@@ -99,7 +99,7 @@ html{
     margin-bottom: 1rem;
   }
   /* Sidebar */
-  
+
   .brand button {
     font-size: 3rem;
     padding: .5rem;
@@ -112,23 +112,13 @@ html{
     position: fixed;
     transform: translateX(-30rem);
     width: 30rem;
-    background-color: #f0f0f0;
+    background-color: #000000;
     height: 100%;
   }
   .sidebar.open{
     transform: translateX(0);
   }
-  
+
   .sidebar-close-button{
-    border-radius: 50%;
-    border: .1rem #000000 solid;
-    width: 3rem;
-    height: 3rem;
-    padding: .5rem;
-    font-size: 2rem;
-    padding-top: 0;
-    cursor: pointer;
-    position: absolute;
-    right: .5rem;
-    top: 1.5rem
+
   }
